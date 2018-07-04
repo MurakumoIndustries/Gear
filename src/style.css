@@ -1,0 +1,43 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+    height: 100%;
+}
+
+.panel-heading {
+    cursor: pointer;
+}
+
+#main {
+    padding-top: 56px;
+    overflow: auto;
+    position: relative;
+}
+
+/* icons */
+
+.icon {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: bottom;
+}
+
+.icon.icon-version {
+    width: 2.5rem;
+    height: 2.5rem;
+    opacity: 0.5;
+    vertical-align: middle;
+    background-image: url(./img/version.png);
+}
+
+.icon.icon-td {
+    width: 3rem;
+    height: 3rem;
+}
