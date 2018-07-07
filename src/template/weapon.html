@@ -1,0 +1,85 @@
+<div class="media mb-2">
+    <div class="mr-3">
+        <div class="text-center" style="line-height: 1rem;font-size: 0.5rem;min-height: 1rem;">
+            <%=weapon.evoType %>
+        </div>
+        <img class="icon icon-td" src="<%=weapon.icon ? '../img/item/' + weapon.icon + '.png' : " " %>" alt="<%=weapon.name %>">
+    </div>
+    <div class="media-body">
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="float-left">
+                    COST
+                </div>
+                <div class="text-right">
+                    <%=weapon.cost %>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="float-left">
+                    type
+                </div>
+                <div class="text-right">
+                    <%=weapon.type %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto">
+                ATK
+            </div>
+            <div class="col">
+                <div id="detailAtk" class="text-right">
+                    <% 
+                    switch (weapon.category) {
+                        case 1: %>
+                        <%=weapon.shortAtkMax %>
+                            <%break;
+                        case 2: %>
+                                <%=weapon.longAtkMax %>
+                                    <%break;
+                        default:break;
+                    }
+                     %>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div id="detailAttr" class="text-right">
+                    <% 
+                        switch (weapon.category) {
+                            case 1: %>
+                        <%=Ui.renderAttrText(weapon.shortAttrMax) %>
+                            <%break;
+                            case 2: %>
+                                <%=Ui.renderAttrText(weapon.longAttrMax) %>
+                                    <%break;
+                            default:break;
+                        }
+                         %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="gearExtraInfo">
+    <div class="card mb-2">
+        <div class="card-header" data-toggle="collapse" data-target="#collapseDesc">
+            Description
+        </div>
+        <div id="collapseDesc" class="collapse show" data-parent="#gearExtraInfo">
+            <div class="card-body">
+                <%=Ui.renderDesc(weapon.desc) %>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-2">
+        <div class="card-header" data-toggle="collapse" data-target="#collapseEvo">
+            Evolve
+        </div>
+        <div id="collapseEvo" class="collapse" data-parent="#gearExtraInfo">
+            <div class="card-body">
+                test
+            </div>
+        </div>
+    </div>
+</div>

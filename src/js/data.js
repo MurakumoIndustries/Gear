@@ -2,7 +2,7 @@ import localForage from "localforage";
 
 var data = {};
 
-const version = 20946;
+const version = 20987;
 var getVersion = function () { return version; };
 
 const baseKey = "MI_Gear_";
@@ -20,10 +20,12 @@ var init = function (forceInit) {
                 });
             };
             promises.push(loaddata('actress'));
+            promises.push(loaddata('weapon'));
             promises.push(loaddata('equipment'));
             promises.push(loaddata('skillactive'));
             promises.push(loaddata('skillpassive'));
-            promises.push(loaddata('weapon'));
+            promises.push(loaddata('catalog'));
+            promises.push(loaddata('recipe'));
             return Promise.all(promises);
         }
         return localForage.clear().then(() => {
@@ -57,6 +59,16 @@ var init = function (forceInit) {
                 /* webpackChunkName: "jsondata" */
                 '../data/skillpassive.json').then(jsondata => {
                     return savedata('skillpassive', jsondata);
+                }));
+            promises.push(import(
+                /* webpackChunkName: "jsondata" */
+                '../data/catalog.json').then(jsondata => {
+                    return savedata('catalog', jsondata);
+                }));
+            promises.push(import(
+                /* webpackChunkName: "jsondata" */
+                '../data/recipe.json').then(jsondata => {
+                    return savedata('recipe', jsondata);
                 }));
             return Promise.all(promises).then(() => {
                 return saveLastUpdate();

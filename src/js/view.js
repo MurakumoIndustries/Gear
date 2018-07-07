@@ -33,31 +33,27 @@ var initControl = function () {
     $('input[type=radio][name=GearType]').change(function () {
         page.redirect("/" + this.value);
     });
-    //search
+    //search control
     var inputTimeout;
     $('#searchContainer input').keyup(function () {
         clearTimeout(inputTimeout);
         inputTimeout = setTimeout(function () {
-            render();
-        }, 500);
+            search();
+        }, 200);
     });
     $('#searchContainer select').change(function () {
         clearTimeout(inputTimeout);
-        render();
+        search();
     });
+
     inited = true;
 };
-var render = function (type) {
-    if (!type) {
-        type = currentType;
+var search = function () {
+    if ($.fn.DataTable.isDataTable('#dataTable')) {
+        $('#dataTable').DataTable().ajax.reload();
     }
-    currentType = type;
-
-    $('input[type=radio][name=GearType]').parent().removeClass('active');
-    $('input[type=radio][name=GearType][value=' + currentType + ']')
-        .prop('checked', true)
-        .parent().addClass('active');
-
+};
+var getData = function (type) {
     var raw = Data.getAll(type);
     //filter raw
     var param = {
@@ -69,38 +65,68 @@ var render = function (type) {
         }
         return true;
     });
-    //render table
     var data = [];
-    //$('#dataTable').empty();
-    if ($.fn.DataTable.isDataTable('#dataTable')) {
-        $('#dataTable').DataTable().destroy();
-    }
     $.each(raw, function (i, o) {
-        var $tr = $('<tr>');
-        var $imgtd = $('<td>');
         var row = $.extend({}, o);
         row.icon = o.icon ? '../img/item/' + o.icon + '.png' : "";
         row.actress = Data.get('actress', o.actressId);
         data.push(row);
     });
+    return data;
+};
+var render = function (type) {
+    if (type == currentType) {
+        return;
+    }
+    currentType = type;
+
+    $('input[type=radio][name=GearType]').parent().removeClass('active');
+    $('input[type=radio][name=GearType][value=' + type + ']')
+        .prop('checked', true)
+        .parent().addClass('active');
+
     $.extend(DataTable.ext.classes, {
         sInfo: "",
         sLengthSelect: "custom-select form-control",
     });
+    if ($.fn.DataTable.isDataTable('#dataTable')) {
+        $('#dataTable').DataTable().destroy();
+    }
     $('#dataTable').DataTable({
-        data: data,
+        ajax: function (data, callback, settings) {
+            callback({
+                data: getData(type)
+            });
+        },
         language: Ui.getText("DataTables_i18n"),
-        dom: 'rt<"row mx-1"<"col text-nowrap"l><"col text-center py-2"i><"col-auto"p>>',
+        dom: '<"row mx-1"<"col text-nowrap"l><"col text-center py-2"i><"col-auto"p>>rt<"row mx-1"<"col text-nowrap"l><"col text-center py-2"i><"col-auto"p>>',
         processing: true,
-        order: [[2, 'desc'], [5, 'desc'], [3, 'asc'], [4, 'asc'],],
+        order: [
+            [2, 'desc'],
+            [3, 'desc'],
+            [6, 'desc'],
+            [4, 'asc'],
+            [5, 'asc'],
+        ],
         columns: [
             {
-                title: "Image", data: "icon", orderable: false, render: function (data, type, row, meta) {
-                    return '<img class="icon icon-td" src="' + data + '"/>';
+                data: "icon", orderable: false, render: function (data, _type, row, meta) {
+                    return '<a href="#!/' + type + '/' + row.id + '">' +
+                        '<img class="icon icon-td" title="' + row.name + '" alt="' + row.name + '" src="' + data + '"/>';
                 }
             },
-            { title: "Name", data: "name", className: "text-nowrap" },
+            {
+                title: "Name", data: "name", render: function (data, _type, row, meta) {
+                    return '<a href="#!/' + type + '/' + row.id + '">' +
+                        data;
+                }
+            },
             { title: "Cost", data: "cost" },
+            {
+                title: "Rare", data: "rare", render: function (data, type, row, meta) {
+                    return _.repeat("★", data);
+                }
+            },
             {
                 title: "Category", data: "category", render: function (data, type, row, meta) {
                     return data;
@@ -136,21 +162,37 @@ var render = function (type) {
                 className: "text-nowrap"
             },
             {
-                title: "Desc", data: 'shortDesc', render: function (data, type, row, meta) {
+                title: "Desc",width:"20rem", data: 'shortDesc', render: function (data, type, row, meta) {
                     return Ui.renderDesc(data);
                 }
             },
-        ]
+        ],
     });
 };
-var detail = function (id) {
-    console.log("render", id);
-    var self = this;
-    if (!id) {
-        //hideAll();
+var detail = function (type, id) {
+    console.log("render", type, id);
+    if (!type || !id) {
         return;
     }
-    //expandById(id);
+    var data = Data.get(type, id);
+    var name = data.name;
+    switch (type) {
+        case "weapon": {
+            var template = require('../template/weapon.html');
+            var html = template({
+                weapon: data,
+                Ui:Ui
+            });
+            $('#modal-body').html(html);
+            break;
+        }
+        case "equipment": {
+            break;
+        }
+        default: break;
+    }
+    $('#modal-title').text(name)
+    $('#modal').modal('show');
 };
 
 
