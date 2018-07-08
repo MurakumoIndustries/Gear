@@ -40,6 +40,25 @@ body {
 
 .attr-text.attr-theory {}
 
+.evo-type-text {
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1rem;
+    font-size: 0.75rem;
+    min-height: 1rem;
+}
+
+.evo-container {
+    width: 6rem;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0.25rem 0;
+}
+
+.evo-container.evo-container-current {
+    background: #ccc;
+}
+
 /* icons */
 
 .icon {
@@ -60,7 +79,63 @@ body {
     background-image: url(./img/version.png);
 }
 
-.icon.icon-td {
+.icon.icon-gear {
     width: 4rem;
     height: 4rem;
+}
+
+.icon-gear-container {
+    display: inline-block;
+    position: relative;
+}
+
+.icon-gear-container a, .icon-gear-container a:hover {
+    text-decoration: none;
+}
+
+.icon-gear-container .icon-gear-memoca-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.icon-gear-container .icon-gear-memoca-container .memoca-slot {
+    width: 5px;
+    height: 12px;
+    margin-top: 12px;
+    margin-right: 1px;
+    background: black;
+    border-color: rgba(255, 255, 255, 0.9);
+    border-style: solid;
+    border-width: 1px 0 1px 1px;
+}
+
+.icon.icon-item {
+    width: 4rem;
+    height: 4rem;
+}
+
+.item-container {
+    display: inline-block;
+    margin: 0 0.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.item-container:first-of-type {
+    margin-left: 0;
+}
+
+.item-container:last-of-type {
+    margin-right: 0;
+}
+
+.item-container .item-count {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-right: 0.25rem;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: #000;
+    font-size: 0.9rem;
 }

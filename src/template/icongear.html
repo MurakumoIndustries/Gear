@@ -1,0 +1,14 @@
+<div class="icon-gear-container">
+    <% if(isLink){ %>
+        <a href="#!/<%=type %>/<%=data.id %>">
+            <% } %>
+                <img class="icon icon-gear" src="<%=data.icon ? '../img/item/' + data.icon + '.png' : " " %>" title="<%=data.name %>" alt="<%=data.name %>">
+                <% if(isLink){ %>
+        </a>
+        <% } %>
+            <div class='icon-gear-memoca-container'>
+                <% for(var i=99;i<data.memocaSlotCount;i++){ %>
+                    <div class='memoca-slot'></div>
+                    <% } %>
+            </div>
+</div>

@@ -81,50 +81,78 @@
             </ul>
         </div>
     </nav>
-    <div id="main">
-        <div class="p-2">
-            <form id="searchContainer" class="collapse show" onsubmit="return false;">
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="searchName">Name</label>
-                        <input type="text" class="form-control" id="searchName" placeholder="Name">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="searchType">Type</label>
-                        <select class="selectpicker" id="searchType" data-width="100%">
-                            <option value="">All</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="searchAttribute">Attribute</label>
-                        <select class="selectpicker" id="searchAttribute" data-width="100%">
-                            <option value="">All</option>
-                            <option value="">All</option>
-                            <option value="">All</option>
-                        </select>
-                    </div>
+    <div id="main" class="container-fluid">
+        <div class="card my-2">
+            <div style="cursor: pointer;" class="card-header" data-toggle="collapse" data-target="#collapseSearch">
+                <i class="material-icons">menu</i>
+                <span data-lang="search">Search</span>
+            </div>
+            <div id="collapseSearch" class="collapse">
+                <div class="card-body">
+                    <form id="searchContainer" onsubmit="return false;">
+                        <div class="form-group row mb-0">
+                            <label class="col-3 col-lg-1 col-form-label" for="searchName">Name</label>
+                            <div class="col-9 col-lg-3 mb-2">
+                                <input type="text" class=" form-control" id="searchName" placeholder="Name">
+                            </div>
+                            <label class="col-3 col-lg-1 col-form-label" for="searchRare">Rare</label>
+                            <div class="col-9 col-lg-3 mb-2">
+                                <select class="selectpicker" id="searchRare" data-width="100%">
+                                    <option value="">All</option>
+                                    <option value="4">★★★★</option>
+                                    <option value="3">★★★</option>
+                                    <option value="2">★★</option>
+                                    <option value="1">★</option>
+                                </select>
+                            </div>
+                            <label class="col-3 col-lg-1 col-form-label" for="searchActress">Actress</label>
+                            <div class="col-9 col-lg-3 mb-2">
+                                <select class="selectpicker" id="searchActress" multiple="multiple" data-live-search="true" data-width="100%" data-size="8" data-actions-box="true">
+                                    <option value="0">General</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <!--<label class="col-3 col-lg-1 col-form-label" for="searchName">Name</label>
+                            <div class="col-9 col-lg-3 mb-2">
+                                <input type="text" class=" form-control" id="searchName" placeholder="Name">
+                            </div>
+                            <label class="col-3 col-lg-1 col-form-label" for="searchRare">Rare</label>
+                            <div class="col-9 col-lg-3 mb-2">
+                                <select class="selectpicker" id="searchRare" data-width="100%">
+                                    <option value="">All</option>
+                                    <option value="4">★★★★</option>
+                                    <option value="3">★★★</option>
+                                    <option value="2">★★</option>
+                                    <option value="1">★</option>
+                                </select>
+                            </div>
+                            <label class="col-3 col-lg-1 col-form-label" for="searchActress">Name</label>
+                            <div class="col-9 col-lg-3 mb-2">
+                                <input type="text" class=" form-control" id="searchName" placeholder="Name">
+                            </div>-->
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
-        <div class="p-2">
-            <table id="dataTable" style="min-width:1024px;width:100%" class="table table-bordered table-striped table-sm display"></table>
-        </div>
+        <table id="dataTable" style="min-width:1024px;width:100%" class="table table-bordered table-striped table-sm display"></table>
     </div>
     <div id="modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 id="modal-title" class="modal-title">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="modal-title" class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-body" class="modal-body">
+
+                </div>
             </div>
-            <div id="modal-body" class="modal-body">
-              
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114331235-3"></script>
     <script>

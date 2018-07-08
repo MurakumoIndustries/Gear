@@ -136,6 +136,51 @@ data["DataTables_i18n"] = {
         }
     },
 }
+data["bootstrap-select_i18n"] = {
+    "ja-JP": {
+        noneSelectedText: '何もが選択した',
+        noneResultsText: '\'{0}\'が結果を返さない',
+        countSelectedText: '{0}/{1}が選択した',
+        maxOptionsText: ['限界は達した({n}{var}最大)', '限界をグループは達した({n}{var}最大)', ['アイテム', 'アイテム']],
+        selectAllText: '全部を選択する',
+        deselectAllText: '何も選択しない',
+        multipleSeparator: ', '
+    },
+    "zh-TW": {
+        noneSelectedText: '沒有選取任何項目',
+        noneResultsText: '沒有找到符合的結果',
+        countSelectedText: '已經選取{0}個項目',
+        maxOptionsText: ['超過限制 (最多選擇{n}項)', '超過限制(最多選擇{n}組)'],
+        selectAllText: '選取全部',
+        deselectAllText: '全部取消',
+        multipleSeparator: ', '
+    },
+    "en-US": {
+        noneSelectedText: 'Nothing selected',
+        noneResultsText: 'No results match {0}',
+        countSelectedText: function (numSelected, numTotal) {
+            return (numSelected == 1) ? "{0} item selected" : "{0} items selected";
+        },
+        maxOptionsText: function (numAll, numGroup) {
+            return [
+                (numAll == 1) ? 'Limit reached ({n} item max)' : 'Limit reached ({n} items max)',
+                (numGroup == 1) ? 'Group limit reached ({n} item max)' : 'Group limit reached ({n} items max)'
+            ];
+        },
+        selectAllText: 'Select All',
+        deselectAllText: 'Deselect All',
+        multipleSeparator: ', '
+    },
+    "zh-CN": {
+        noneSelectedText: '没有选中任何项',
+        noneResultsText: '没有找到匹配项',
+        countSelectedText: '选中{1}中的{0}项',
+        maxOptionsText: ['超出限制 (最多选择{n}项)', '组选择超出限制(最多选择{n}组)'],
+        multipleSeparator: ', ',
+        selectAllText: '全选',
+        deselectAllText: '取消全选'
+    },
+};
 
 var getText = function (key) {
     if (!data[key]) {
@@ -174,6 +219,8 @@ var init = function () {
             $this.text(value);
         }
     });
+    //init bootstrap selectpicker
+    $.fn.selectpicker.defaults = getText("bootstrap-select_i18n");
 };
 var renderAttrText = function (textList) {
     var text = "";
