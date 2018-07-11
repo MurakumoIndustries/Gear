@@ -239,16 +239,16 @@
                                                     <%=Ui.renderDesc(data.evoDesc) %>
                                                 </div>
                                             </div>
-                                            <% _.each(data.evoPattern,function(o,i){ %>
+                                            <% _.each(o.evoPattern,function(p,i){ %>
                                                 <div class="form-row">
                                                     <div class="col-6 col-lg-3">
                                                         <%=i %>
                                                     </div>
                                                     <div class="col">
                                                         <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" style='width: <%=Math.min(o,50) %>%;'>
-                                                                <%=o*2 %>%</div>
-                                                            <div class="progress-bar bg-warning" role="progressbar" style='width: <%=Math.max(o-50,0) %>%;'></div>
+                                                            <div class="progress-bar" role="progressbar" style='width: <%=Math.min(p,50) %>%;'>
+                                                                <%=p*2 %>%</div>
+                                                            <div class="progress-bar bg-warning" role="progressbar" style='width: <%=Math.max(p-50,0) %>%;'></div>
                                                         </div>
                                                     </div>
                                                 </div>
