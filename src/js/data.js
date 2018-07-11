@@ -2,7 +2,7 @@ import localForage from "localforage";
 
 var data = {};
 
-const version = 20987;
+const version = 21055;
 var getVersion = function () { return version; };
 
 const baseKey = "MI_Gear_";
@@ -25,7 +25,7 @@ var init = function (forceInit) {
             promises.push(loaddata('skillactive'));
             promises.push(loaddata('skillpassive'));
             promises.push(loaddata('recipe'));
-            promises.push(loaddata('catalog'));
+            promises.push(loaddata('material'));
             return Promise.all(promises);
         }
         return localForage.clear().then(() => {
@@ -67,8 +67,8 @@ var init = function (forceInit) {
                 }));
             promises.push(import(
                 /* webpackChunkName: "jsondata" */
-                '../data/catalog.json').then(jsondata => {
-                    return savedata('catalog', jsondata);
+                '../data/material.json').then(jsondata => {
+                    return savedata('material', jsondata);
                 }));
             return Promise.all(promises).then(() => {
                 return saveLastUpdate();

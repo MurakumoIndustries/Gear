@@ -34,6 +34,11 @@ var initControl = function () {
         page.redirect("/" + this.value);
     });
 
+    //modal event
+    $('#modal').on('show.bs.modal', function () {
+        $('#modal [data-toggle="tooltip"]').tooltip();
+    });
+
     var actressList = Data.getAll("actress");
     _.each(actressList, function (o, i) {
         var text = o.name + "|" + o.age;
@@ -248,35 +253,47 @@ var detail = function (type, id) {
     }
     var data = Data.get(type, id);
     var name = data.name;
-    var base = $.extend({}, data);
-    while (base.id && _.some(Data.getAll("recipe"), function (o) { return o.remodelId == base.id })) {
-        var baseId = _.find(Data.getAll("recipe"), function (o) { return o.remodelId == base.id }).catalogId;
-        base = $.extend({}, Data.get(type, baseId));
-    }
+    //var base = $.extend({}, data);
+    //while (base.id && _.some(Data.getAll("recipe"), function (o) { return o.remodelId == base.id })) {
+    //    var baseId = _.find(Data.getAll("recipe"), function (o) { return o.remodelId == base.id }).catalogId;
+    //    base = $.extend({}, Data.get(type, baseId));
+    //}
+    //var getChild = function (type, id) {
+    //    var result = [];
+    //    var recipes = _.filter(Data.getAll("recipe"), function (o) { return o.catalogId == id });
+    //    _.each(recipes, function (o, i) {
+    //        var child = $.extend({}, Data.get(type, o.remodelId));
+    //        child.child = getChild(type, child.id);
+    //        result.push(child);
+    //    });
+    //    return result;
+    //};
+    //base.child = getChild(type, base.id);
 
-    var getChild = function (type, id) {
-        var result = [];
-        var recipes = _.filter(Data.getAll("recipe"), function (o) { return o.catalogId == id });
-        _.each(recipes, function (o, i) {
-            var child = $.extend({}, Data.get(type, o.remodelId));
-            child.child = getChild(type, child.id);
-            result.push(child);
+    data.evoFrom = _.map(_.filter(Data.getAll("recipe"), function (o) { return o.remodelId == data.id }),
+        function (o) {
+            return _.extend({
+                evoMaterials: _.orderBy(_.map(o.materials, function (p, i) {
+                    return [Data.get("material", i), p];
+                }), function (p) { return p[0].sortPriority })
+            }, Data.get(type, o.catalogId));
         });
-        return result;
-    };
-    base.child = getChild(type, base.id);
 
-    data.evoRecipe = $.extend({}, _.find(Data.getAll("recipe"), function (o) { return o.remodelId == data.id }));
-    data.evoRecipe.materials = _.orderBy(_.map(data.evoRecipe.materials, function (o, i) {
-        return [Data.get("catalog", i), o];
-    }), function (o) { return o[0].sortPriority });
+    data.evoTo = _.map(_.filter(Data.getAll("recipe"), function (o) { return o.catalogId == data.id }),
+        function (o) {
+            return _.extend({
+                evoMaterials: _.orderBy(_.map(o.materials, function (p, i) {
+                    return [Data.get("material", i), p];
+                }), function (p) { return p[0].sortPriority })
+            }, Data.get(type, o.remodelId));
+        });
+
     switch (type) {
         case "weapon": {
             var template = require('../template/weapon.html');
             var html = template({
                 type: type,
                 data: data,
-                base: base,
                 Ui: Ui,
                 Data: Data,
                 getGearImg: getGearImg,
@@ -289,7 +306,6 @@ var detail = function (type, id) {
             var html = template({
                 type: type,
                 data: data,
-                base: base,
                 Ui: Ui,
                 Data: Data,
                 getGearImg: getGearImg,

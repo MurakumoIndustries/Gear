@@ -117,13 +117,9 @@ body {
 
 .item-container {
     display: inline-block;
-    margin: 0 0.5rem;
+    margin-right: 0.25rem;
     text-align: center;
     position: relative;
-}
-
-.item-container:first-of-type {
-    margin-left: 0;
 }
 
 .item-container:last-of-type {
@@ -133,8 +129,7 @@ body {
 .item-container .item-count {
     position: absolute;
     bottom: 0;
-    right: 0;
-    padding-right: 0.25rem;
+    right: 0.25rem;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     color: #000;
     font-size: 0.9rem;

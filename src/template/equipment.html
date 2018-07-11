@@ -148,74 +148,131 @@
             Evolve
         </div>
         <div id="collapseEvo" class="collapse" data-parent="#gearExtraInfo">
-            <div class="card-body">
-                <div class="text-center text-nowrap" style="overflow-y: auto;">
-                    <div>
-                        <%
-                        var renderChild=function(base,isBase){ 
-                            if(!isBase)
-                            { %>
-                            <div class="icon m-0" style="vertical-align: middle;">
-                                <i class="material-icons">arrow_forward_ios</i>
-                            </div>
-                            <% }
-                            %>
-                                <div class='evo-container <%=base.id==data.id?"evo-container-current":"" %>'>
-                                    <div class="evo-type-text">
-                                        <%=base.evoType %>
+            <div class="card-body p-2">
+                <div class="form-row">
+                    <div class="col">
+                        <div id="collapseEvoFrom">
+                            <% _.each(data.evoFrom,function(o,i){ %>
+                                <div class="card">
+                                    <div class="card-header py-2 px-3" data-toggle="collapse" data-target="#collapseEvoFrom<%=o.id %>">
+                                        <%=o.name %>
                                     </div>
-                                    <div class="text-center" style="line-height: 0;">
-                                        <%=getGearImg(type, base, true) %>
-                                    </div>
-                                    <div class="evo-type-text">
-                                        <%=base.name %>
-                                    </div>
-                                </div>
-                                <div class="d-inline-block align-middle">
-                                    <% _.each(base.child,function(o,i){ %>
-                                        <div>
-                                            <% renderChild(o); %>
+                                    <div id="collapseEvoFrom<%=o.id %>" class="collapse" data-parent="#collapseEvoFrom">
+                                        <div class="card-body p-2">
+                                            <div class="media">
+                                                <div class="mr-2 text-center">
+                                                    <div class="evo-type-text">
+                                                        <%=o.evoType %>
+                                                    </div>
+                                                    <%=getGearImg(type, o, true) %>
+                                                        <div class="evo-type-text">
+                                                            <%=o.name %>
+                                                        </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <%=Ui.renderDesc(data.evoDesc) %>
+                                                </div>
+                                            </div>
+                                            <% _.each(data.evoPattern,function(o,i){ %>
+                                                <div class="form-row">
+                                                    <div class="col-6 col-lg-3">
+                                                        <%=i %>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" style='width: <%=Math.min(o,50) %>%;'>
+                                                                <%=o*2 %>%</div>
+                                                            <div class="progress-bar bg-warning" role="progressbar" style='width: <%=Math.max(o-50,0) %>%;'></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% }) %>
+                                                    <div class="form-row">
+                                                        <div class="col text-center">
+                                                            <% _.each(o.evoMaterials,function(o,i){ 
+                                                                        //var catalog=Data.get("catalog",i);
+                                                                        var material=o[0];%>
+                                                                <div class="item-container" data-toggle="tooltip" data-html="true" title="<%-'<b>'+material.name+'</b><br />'+Ui.renderDesc(material.desc) %>">
+                                                                    <img class="icon icon-item" src="<%='../img/item/' + (material.icon || 'itm2_04_000_01') + '.png' %>" />
+                                                                    <span class="item-count">
+                                                                        <%=o[1] %>
+                                                                            <span>
+                                                                </div>
+                                                                <% }) %>
+                                                        </div>
+                                                    </div>
                                         </div>
-                                        <% }) %>
+                                    </div>
                                 </div>
-                                <% }; %>
-                                    <% renderChild(base,true); %>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <% _.each(data.evoPattern,function(o,i){ %>
-                        <div class="row">
-                            <div class="col-2">
-                                <%=i %>
-                            </div>
-                            <div class="col">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" style='width: <%=Math.min(o,50) %>%;'>
-                                        <%=o*2 %>%</div>
-                                    <div class="progress-bar bg-warning" role="progressbar" style='width: <%=Math.max(o-50,0) %>%;'></div>
-                                </div>
-                            </div>
+                                <% }) %>
                         </div>
-                        <% }) %>
-                            <div class="row">
-                                <div class="col">
-                                    <%=Ui.renderDesc(data.evoDesc) %>
-                                </div>
+                    </div>
+                    <div class="d-none col-auto text-center">
+                        <div class="evo-type-text">
+                            <%=data.evoType %>
+                        </div>
+                        <%=getGearImg(type, data) %>
+                            <div class="evo-type-text">
+                                <%=data.name %>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <% _.each(data.evoRecipe.materials,function(o,i){ 
-                                        //var catalog=Data.get("catalog",i);
-                                        var catalog=o[0];%>
-                                        <div class="item-container">
-                                            <img class="icon icon-item" src="<%='../img/item/' + (catalog.icon || 'itm2_04_000_01') + '.png' %>" />
-                                            <span class="item-count">
-                                                <%=o[1] %>
-                                                    <span>
+                    </div>
+                    <div class="col">
+                        <div id="collapseEvoTo">
+                            <% _.each(data.evoTo,function(o,i){ %>
+                                <div class="card">
+                                    <div class="card-header py-2 px-3" data-toggle="collapse" data-target="#collapseEvoTo<%=o.id %>">
+                                        <%=o.name %>
+                                    </div>
+                                    <div id="collapseEvoTo<%=o.id %>" class="collapse" data-parent="#collapseEvoTo">
+                                        <div class="card-body p-2">
+                                            <div class="media">
+                                                <div class="mr-2 text-center">
+                                                    <div class="evo-type-text">
+                                                        <%=o.evoType %>
+                                                    </div>
+                                                    <%=getGearImg(type, o, true) %>
+                                                        <div class="evo-type-text">
+                                                            <%=o.name %>
+                                                        </div>
+                                                </div>
+                                                <div class="media-body">
+                                                    <%=Ui.renderDesc(data.evoDesc) %>
+                                                </div>
+                                            </div>
+                                            <% _.each(data.evoPattern,function(o,i){ %>
+                                                <div class="form-row">
+                                                    <div class="col-6 col-lg-3">
+                                                        <%=i %>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="progress">
+                                                            <div class="progress-bar" role="progressbar" style='width: <%=Math.min(o,50) %>%;'>
+                                                                <%=o*2 %>%</div>
+                                                            <div class="progress-bar bg-warning" role="progressbar" style='width: <%=Math.max(o-50,0) %>%;'></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <% }) %>
+                                                    <div class="form-row">
+                                                        <div class="col text-center">
+                                                            <% _.each(o.evoMaterials,function(o,i){ 
+                                                                        //var catalog=Data.get("catalog",i);
+                                                                        var material=o[0];%>
+                                                                <div class="item-container" data-toggle="tooltip" data-html="true" title="<%-'<b>'+material.name+'</b><br />'+Ui.renderDesc(material.desc) %>">
+                                                                    <img class="icon icon-item" src="<%='../img/item/' + (material.icon || 'itm2_04_000_01') + '.png' %>" />
+                                                                    <span class="item-count">
+                                                                        <%=o[1] %>
+                                                                            <span>
+                                                                </div>
+                                                                <% }) %>
+                                                        </div>
+                                                    </div>
                                         </div>
-                                        <% }) %>
+                                    </div>
                                 </div>
-                            </div>
+                                <% }) %>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
