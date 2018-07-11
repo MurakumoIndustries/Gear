@@ -34,11 +34,6 @@ var initControl = function () {
         page.redirect("/" + this.value);
     });
 
-    //modal event
-    $('#modal').on('show.bs.modal', function () {
-        $('#modal [data-toggle="tooltip"]').tooltip();
-    });
-
     var actressList = Data.getAll("actress");
     _.each(actressList, function (o, i) {
         var text = o.name + "|" + o.age;
@@ -315,7 +310,8 @@ var detail = function (type, id) {
         }
         default: break;
     }
-    $('#modal-title').text(name)
+    $('#modal [data-toggle="tooltip"]').tooltip();
+    $('#modal-title').text(name);
     $('#modal').modal('show');
 };
 
