@@ -148,66 +148,16 @@
             Evolve
         </div>
         <div id="collapseEvo" class="collapse" data-parent="#gearExtraInfo">
-            <div class="card-body p-2">
-                <div class="form-row">
-                    <div class="col">
+            <div class="card-body p-0">
+                <div class="form-row m-0">
+                    <div class="col px-2 pt-2 pb-0 border-right">
                         <div id="collapseEvoFrom">
                             <% _.each(data.evoFrom,function(o,i){ %>
-                                <div class="card">
-                                    <div class="card-header py-2 px-3" data-toggle="collapse" data-target="#collapseEvoFrom<%=o.id %>">
-                                        <%=o.name %>
-                                    </div>
-                                    <div id="collapseEvoFrom<%=o.id %>" class="collapse" data-parent="#collapseEvoFrom">
-                                        <div class="card-body p-2">
-                                            <div class="media">
-                                                <div class="mr-2 text-center">
-                                                    <div class="evo-type-text">
-                                                        <%=o.evoType %>
-                                                    </div>
-                                                    <%=getGearImg(type, o, true) %>
-                                                        <div class="evo-type-text">
-                                                            <%=o.name %>
-                                                        </div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <%=Ui.renderDesc(data.evoDesc) %>
-                                                </div>
-                                            </div>
-                                            <% _.each(data.evoPattern,function(o,i){ %>
-                                                <div class="form-row">
-                                                    <div class="col-6 col-lg-3">
-                                                        <%=i %>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" style='width: <%=Math.min(o,50) %>%;'>
-                                                                <%=o*2 %>%</div>
-                                                            <div class="progress-bar bg-warning" role="progressbar" style='width: <%=Math.max(o-50,0) %>%;'></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <% }) %>
-                                                    <div class="form-row">
-                                                        <div class="col text-center">
-                                                            <% _.each(o.evoMaterials,function(o,i){ 
-                                                                        //var catalog=Data.get("catalog",i);
-                                                                        var material=o[0];%>
-                                                                <div class="item-container" data-toggle="tooltip" data-html="true" title="<%-'<b>'+material.name+'</b><br />'+Ui.renderDesc(material.desc) %>">
-                                                                    <img class="icon icon-item" src="<%='../img/item/' + (material.icon || 'itm2_04_000_01') + '.png' %>" />
-                                                                    <span class="item-count">
-                                                                        <%=o[1] %>
-                                                                            <span>
-                                                                </div>
-                                                                <% }) %>
-                                                        </div>
-                                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% }) %>
+                                <%=getEvoCard(type,0,o,data) %>
+                                    <% }) %>
                         </div>
                     </div>
-                    <div class="d-none col-auto text-center">
+                    <!-- <div class="d-none col-auto text-center">
                         <div class="evo-type-text">
                             <%=data.evoType %>
                         </div>
@@ -215,62 +165,12 @@
                             <div class="evo-type-text">
                                 <%=data.name %>
                             </div>
-                    </div>
-                    <div class="col">
+                    </div> -->
+                    <div class="col px-2 pt-2 pb-0">
                         <div id="collapseEvoTo">
                             <% _.each(data.evoTo,function(o,i){ %>
-                                <div class="card">
-                                    <div class="card-header py-2 px-3" data-toggle="collapse" data-target="#collapseEvoTo<%=o.id %>">
-                                        <%=o.name %>
-                                    </div>
-                                    <div id="collapseEvoTo<%=o.id %>" class="collapse" data-parent="#collapseEvoTo">
-                                        <div class="card-body p-2">
-                                            <div class="media">
-                                                <div class="mr-2 text-center">
-                                                    <div class="evo-type-text">
-                                                        <%=o.evoType %>
-                                                    </div>
-                                                    <%=getGearImg(type, o, true) %>
-                                                        <div class="evo-type-text">
-                                                            <%=o.name %>
-                                                        </div>
-                                                </div>
-                                                <div class="media-body">
-                                                    <%=Ui.renderDesc(data.evoDesc) %>
-                                                </div>
-                                            </div>
-                                            <% _.each(o.evoPattern,function(p,i){ %>
-                                                <div class="form-row">
-                                                    <div class="col-6 col-lg-3">
-                                                        <%=i %>
-                                                    </div>
-                                                    <div class="col">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar" style='width: <%=Math.min(p,50) %>%;'>
-                                                                <%=p*2 %>%</div>
-                                                            <div class="progress-bar bg-warning" role="progressbar" style='width: <%=Math.max(p-50,0) %>%;'></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <% }) %>
-                                                    <div class="form-row">
-                                                        <div class="col text-center">
-                                                            <% _.each(o.evoMaterials,function(o,i){ 
-                                                                        //var catalog=Data.get("catalog",i);
-                                                                        var material=o[0];%>
-                                                                <div class="item-container" data-toggle="tooltip" data-html="true" title="<%-'<b>'+material.name+'</b><br />'+Ui.renderDesc(material.desc) %>">
-                                                                    <img class="icon icon-item" src="<%='../img/item/' + (material.icon || 'itm2_04_000_01') + '.png' %>" />
-                                                                    <span class="item-count">
-                                                                        <%=o[1] %>
-                                                                            <span>
-                                                                </div>
-                                                                <% }) %>
-                                                        </div>
-                                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% }) %>
+                                <%=getEvoCard(type,1,data,o) %>
+                                    <% }) %>
                         </div>
                     </div>
                 </div>

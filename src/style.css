@@ -89,7 +89,8 @@ body {
     position: relative;
 }
 
-.icon-gear-container a, .icon-gear-container a:hover {
+.icon-gear-container a,
+.icon-gear-container a:hover {
     text-decoration: none;
 }
 

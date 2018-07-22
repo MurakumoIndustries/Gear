@@ -1,8 +1,7 @@
 import $ from "jquery";
 import _ from 'lodash';
 
-var supportedLang = [
-    {
+var supportedLang = [{
         key: 'ja-JP',
         text: '日本語'
     },
@@ -225,7 +224,8 @@ var init = function () {
 var renderAttrText = function (textList) {
     var text = "";
     var attrList = ["normal", "thunder", "gravity", "fire", "ice",
-        "light", "collapse", "theory", "nothing"];
+        "light", "collapse", "theory", "nothing"
+    ];
     _.each(textList, function (o, i) {
         if (o > 0) {
             text += '<span class="attr-text attr-' + attrList[i] + '">' + o + '</span>';

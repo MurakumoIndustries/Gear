@@ -135,111 +135,158 @@ var render = function (type) {
         ],
     };
     switch (type) {
-        case "weapon": {
-            $.extend(tableOption, {
-                columns: [
-                    {
-                        data: "icon", orderable: false, render: function (data, _type, row, meta) {
-                            return getGearImg(type, row, true);
-                        }
-                    },
-                    {
-                        title: "Name", data: "name", render: function (data, _type, row, meta) {
-                            return '<a href="#!/' + type + '/' + row.id + '">' +
-                                data;
-                        }
-                    },
-                    { title: "Cost", data: "cost" },
-                    {
-                        title: "Rare", data: "rare", render: function (data, type, row, meta) {
-                            return _.repeat("★", data);
-                        }
-                    },
-                    {
-                        title: "Category", data: "category", render: function (data, type, row, meta) {
-                            return data;
-                        }
-                    },
-                    { title: "Type", data: 'type' },
-                    { title: "MaxLv", data: 'maxLv' },
-                    {
-                        title: "Atk", data: null, render: function (data, type, row, meta) {
-                            switch (row.category) {
-                                case 1: return row.shortAtkMax;
-                                case 2: return row.longAtkMax;
-                                default: return 0;
+        case "weapon":
+            {
+                $.extend(tableOption, {
+                    columns: [{
+                            data: "icon",
+                            orderable: false,
+                            render: function (data, _type, row, meta) {
+                                return getGearImg(type, row, true);
                             }
-                        }
-                    },
-                    {
-                        title: "AttrAtk", data: null, render: function (data, type, row, meta) {
-                            switch (row.category) {
-                                case 1: return row.shortAttrMax[row.attribute2nd - 4] || 0;
-                                case 2: return row.longAttrMax[row.attribute2nd - 4] || 0;
-                                default: return 0;
-                            }
-                        }
-                    },
-                    {
-                        title: "Actress", data: null, render: function (data, type, row, meta) {
-                            if (row.actress) {
-                                return row.actress.name;
-                            }
-                            return null;
                         },
-                        className: "text-nowrap"
-                    },
-                    {
-                        title: "Desc", width: "20rem", data: 'shortDesc', render: function (data, type, row, meta) {
-                            return Ui.renderDesc(data);
-                        }
-                    },
-                ]
-            });
+                        {
+                            title: "Name",
+                            data: "name",
+                            render: function (data, _type, row, meta) {
+                                return '<a href="#!/' + type + '/' + row.id + '">' +
+                                    data;
+                            }
+                        },
+                        { title: "Cost", data: "cost" },
+                        {
+                            title: "Rare",
+                            data: "rare",
+                            render: function (data, type, row, meta) {
+                                return _.repeat("★", data);
+                            }
+                        },
+                        {
+                            title: "Category",
+                            data: "category",
+                            render: function (data, type, row, meta) {
+                                return data;
+                            }
+                        },
+                        { title: "Type", data: 'type' },
+                        { title: "MaxLv", data: 'maxLv' },
+                        {
+                            title: "Atk",
+                            data: null,
+                            render: function (data, type, row, meta) {
+                                switch (row.category) {
+                                    case 1:
+                                        return row.shortAtkMax;
+                                    case 2:
+                                        return row.longAtkMax;
+                                    default:
+                                        return 0;
+                                }
+                            }
+                        },
+                        {
+                            title: "AttrAtk",
+                            data: null,
+                            render: function (data, type, row, meta) {
+                                switch (row.category) {
+                                    case 1:
+                                        return row.shortAttrMax[row.attribute2nd - 4] || 0;
+                                    case 2:
+                                        return row.longAttrMax[row.attribute2nd - 4] || 0;
+                                    default:
+                                        return 0;
+                                }
+                            }
+                        },
+                        {
+                            title: "Actress",
+                            data: null,
+                            render: function (data, type, row, meta) {
+                                if (row.actress) {
+                                    return row.actress.name;
+                                }
+                                return null;
+                            },
+                            className: "text-nowrap"
+                        },
+                        {
+                            title: "Desc",
+                            width: "20rem",
+                            data: 'shortDesc',
+                            render: function (data, type, row, meta) {
+                                return Ui.renderDesc(data);
+                            }
+                        },
+                    ]
+                });
+                break;
+            }
+        case "equipment":
+            {
+                $.extend(tableOption, {
+                    columns: [{
+                            data: "icon",
+                            orderable: false,
+                            render: function (data, _type, row, meta) {
+                                return getGearImg(type, row, true);
+                            }
+                        },
+                        {
+                            title: "Name",
+                            data: "name",
+                            render: function (data, _type, row, meta) {
+                                return '<a href="#!/' + type + '/' + row.id + '">' +
+                                    data;
+                            }
+                        },
+                        { title: "Cost", data: "cost" },
+                        {
+                            title: "Rare",
+                            data: "rare",
+                            render: function (data, type, row, meta) {
+                                return _.repeat("★", data);
+                            }
+                        },
+                        {
+                            title: "Category",
+                            data: "category",
+                            render: function (data, type, row, meta) {
+                                return data;
+                            }
+                        },
+                        { title: "Type", data: 'type' },
+                        { title: "MaxLv", data: 'maxLv' },
+                        { title: "HP", data: 'hpMax' },
+                        { title: "DEF", data: 'defMax' },
+                        { title: "SPD", data: 'spdMax' },
+                        {
+                            title: "Desc",
+                            width: "20rem",
+                            data: 'shortDesc',
+                            render: function (data, type, row, meta) {
+                                return Ui.renderDesc(data);
+                            }
+                        },
+                    ]
+                });
+                break;
+            }
+        default:
             break;
-        }
-        case "equipment": {
-            $.extend(tableOption, {
-                columns: [
-                    {
-                        data: "icon", orderable: false, render: function (data, _type, row, meta) {
-                            return getGearImg(type, row, true);
-                        }
-                    },
-                    {
-                        title: "Name", data: "name", render: function (data, _type, row, meta) {
-                            return '<a href="#!/' + type + '/' + row.id + '">' +
-                                data;
-                        }
-                    },
-                    { title: "Cost", data: "cost" },
-                    {
-                        title: "Rare", data: "rare", render: function (data, type, row, meta) {
-                            return _.repeat("★", data);
-                        }
-                    },
-                    {
-                        title: "Category", data: "category", render: function (data, type, row, meta) {
-                            return data;
-                        }
-                    },
-                    { title: "Type", data: 'type' },
-                    { title: "MaxLv", data: 'maxLv' },
-                    { title: "HP", data: 'hpMax' },
-                    { title: "DEF", data: 'defMax' },
-                    { title: "SPD", data: 'spdMax' },
-                    {
-                        title: "Desc", width: "20rem", data: 'shortDesc', render: function (data, type, row, meta) {
-                            return Ui.renderDesc(data);
-                        }
-                    },
-                ]
-            });
-            break;
-        }
-        default: break;
     }
     $('#dataTable').DataTable(tableOption);
+};
+var getEvoCard = function (type, evoType, from, to) {
+    var template = require('../template/evocard.html');
+    var html = template({
+        type: type,
+        evoType: evoType,
+        from: from,
+        to: to,
+        Ui: Ui,
+        getGearImg: getGearImg,
+    });
+    return html;
 };
 var detail = function (type, id) {
     console.log("render", type, id);
@@ -248,22 +295,6 @@ var detail = function (type, id) {
     }
     var data = Data.get(type, id);
     var name = data.name;
-    //var base = $.extend({}, data);
-    //while (base.id && _.some(Data.getAll("recipe"), function (o) { return o.remodelId == base.id })) {
-    //    var baseId = _.find(Data.getAll("recipe"), function (o) { return o.remodelId == base.id }).catalogId;
-    //    base = $.extend({}, Data.get(type, baseId));
-    //}
-    //var getChild = function (type, id) {
-    //    var result = [];
-    //    var recipes = _.filter(Data.getAll("recipe"), function (o) { return o.catalogId == id });
-    //    _.each(recipes, function (o, i) {
-    //        var child = $.extend({}, Data.get(type, o.remodelId));
-    //        child.child = getChild(type, child.id);
-    //        result.push(child);
-    //    });
-    //    return result;
-    //};
-    //base.child = getChild(type, base.id);
 
     data.evoFrom = _.map(_.filter(Data.getAll("recipe"), function (o) { return o.remodelId == data.id }),
         function (o) {
@@ -284,31 +315,36 @@ var detail = function (type, id) {
         });
 
     switch (type) {
-        case "weapon": {
-            var template = require('../template/weapon.html');
-            var html = template({
-                type: type,
-                data: data,
-                Ui: Ui,
-                Data: Data,
-                getGearImg: getGearImg,
-            });
-            $('#modal-body').html(html);
+        case "weapon":
+            {
+                var template = require('../template/weapon.html');
+                var html = template({
+                    type: type,
+                    data: data,
+                    Ui: Ui,
+                    Data: Data,
+                    getGearImg: getGearImg,
+                    getEvoCard: getEvoCard,
+                });
+                $('#modal-body').html(html);
+                break;
+            }
+        case "equipment":
+            {
+                var template = require('../template/equipment.html');
+                var html = template({
+                    type: type,
+                    data: data,
+                    Ui: Ui,
+                    Data: Data,
+                    getGearImg: getGearImg,
+                    getEvoCard: getEvoCard,
+                });
+                $('#modal-body').html(html);
+                break;
+            }
+        default:
             break;
-        }
-        case "equipment": {
-            var template = require('../template/equipment.html');
-            var html = template({
-                type: type,
-                data: data,
-                Ui: Ui,
-                Data: Data,
-                getGearImg: getGearImg,
-            });
-            $('#modal-body').html(html);
-            break;
-        }
-        default: break;
     }
     $('#modal [data-toggle="tooltip"]').tooltip();
     $('#modal-title').text(name);
