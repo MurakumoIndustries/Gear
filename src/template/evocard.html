@@ -19,13 +19,13 @@
                             </div>
                     </div>
                     <div class="media-body">
-                        <%=Ui.renderDesc(data.evoDesc) %>
+                        <%=Ui.renderDesc(to.evoDesc) %>
                     </div>
                 </div>
                 <% for(var i=0;i<from.evoPattern.length;i++){
                     var evoPatternFrom=from.evoPattern[i];
                     var evoPatternTo=to.evoPattern[i];
-                    var patternName=evoPatternFrom.key;
+                    var patternName=evoPatternTo.key;
                     var patternValue=Math.round(evoPatternTo.value/evoPatternFrom.value*100);
                      %>
                     <div class="form-row">
