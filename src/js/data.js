@@ -26,6 +26,7 @@ var init = function (forceInit) {
             promises.push(loaddata('skillpassive'));
             promises.push(loaddata('recipe'));
             promises.push(loaddata('material'));
+            promises.push(loaddata('company'));
             return Promise.all(promises);
         }
         return localForage.clear().then(() => {
@@ -35,40 +36,53 @@ var init = function (forceInit) {
                     data[key] = jsondata;
                 });
             }
-            promises.push(import(
-                /* webpackChunkName: "jsondata" */
-                '../data/actress.json').then(jsondata => {
+            promises.push(
+                import (
+                    /* webpackChunkName: "jsondata" */
+                    '../data/actress.json').then(jsondata => {
                     return savedata('actress', jsondata);
                 }));
-            promises.push(import(
-                /* webpackChunkName: "jsondata" */
-                '../data/weapon.json').then(jsondata => {
+            promises.push(
+                import (
+                    /* webpackChunkName: "jsondata" */
+                    '../data/weapon.json').then(jsondata => {
                     return savedata('weapon', jsondata);
                 }));
-            promises.push(import(
-                /* webpackChunkName: "jsondata" */
-                '../data/equipment.json').then(jsondata => {
+            promises.push(
+                import (
+                    /* webpackChunkName: "jsondata" */
+                    '../data/equipment.json').then(jsondata => {
                     return savedata('equipment', jsondata);
                 }));
-            promises.push(import(
-                /* webpackChunkName: "jsondata" */
-                '../data/skillactive.json').then(jsondata => {
+            promises.push(
+                import (
+                    /* webpackChunkName: "jsondata" */
+                    '../data/skillactive.json').then(jsondata => {
                     return savedata('skillactive', jsondata);
                 }));
-            promises.push(import(
-                /* webpackChunkName: "jsondata" */
-                '../data/skillpassive.json').then(jsondata => {
+            promises.push(
+                import (
+                    /* webpackChunkName: "jsondata" */
+                    '../data/skillpassive.json').then(jsondata => {
                     return savedata('skillpassive', jsondata);
                 }));
-            promises.push(import(
-                /* webpackChunkName: "jsondata" */
-                '../data/recipe.json').then(jsondata => {
+            promises.push(
+                import (
+                    /* webpackChunkName: "jsondata" */
+                    '../data/recipe.json').then(jsondata => {
                     return savedata('recipe', jsondata);
                 }));
-            promises.push(import(
-                /* webpackChunkName: "jsondata" */
-                '../data/material.json').then(jsondata => {
+            promises.push(
+                import (
+                    /* webpackChunkName: "jsondata" */
+                    '../data/material.json').then(jsondata => {
                     return savedata('material', jsondata);
+                }));
+            promises.push(
+                import (
+                    /* webpackChunkName: "jsondata" */
+                    '../data/company.json').then(jsondata => {
+                    return savedata('company', jsondata);
                 }));
             return Promise.all(promises).then(() => {
                 return saveLastUpdate();
@@ -81,7 +95,7 @@ var lastUpdate;
 var isDataOutdated = function () {
     return localForage.getItem(lastUpdateKey).then(function (data) {
         lastUpdate = data;
-        return import('../data/lastUpdate.json').then(data => {
+        return import ('../data/lastUpdate.json').then(data => {
             var local = lastUpdate;
             var remote = data;
             var isLatest = new Date(local).getTime() >= new Date(remote).getTime();

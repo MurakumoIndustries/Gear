@@ -314,6 +314,8 @@ var detail = function (type, id) {
             }, Data.get(type, o.remodelId));
         });
 
+    var company = Data.get('company', data.company);
+
     switch (type) {
         case "weapon":
             {
@@ -321,6 +323,7 @@ var detail = function (type, id) {
                 var html = template({
                     type: type,
                     data: data,
+                    company: company,
                     Ui: Ui,
                     Data: Data,
                     getGearImg: getGearImg,
@@ -335,6 +338,7 @@ var detail = function (type, id) {
                 var html = template({
                     type: type,
                     data: data,
+                    company: company,
                     Ui: Ui,
                     Data: Data,
                     getGearImg: getGearImg,

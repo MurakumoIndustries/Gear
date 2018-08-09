@@ -4,7 +4,8 @@
 %>
     <div class="card mb-2">
         <div class="card-header py-2 px-3" data-toggle="collapse" data-target="#collapseEvo<%=evoTypeText %><%=data.id %>">
-            <%=data.name %>
+            <span><%=data.name %></span>
+            <span class="float-right text-black-50">Phase.<%=data.phase %></span>
         </div>
         <div id="collapseEvo<%=evoTypeText %><%=data.id %>" class="collapse" data-parent="#collapseEvo<%=evoTypeText %>">
             <div class="card-body p-2">

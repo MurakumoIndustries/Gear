@@ -1,3 +1,7 @@
+<div style="position:absolute;right:3rem;top:-4rem;">
+    <span class="text-black-50"><%=company.name %></span>
+    <img class="icon icon-company" src="<%=company.icon ? '../img/com/' + company.icon + '.png' : " " %>" title="<%=company.name %>" alt="<%=company.name %>">
+</div>
 <div class="media mb-2">
     <div class="mr-3">
         <div class="evo-type-text">
@@ -74,7 +78,8 @@
     </div>
     <div class="card mb-2">
         <div class="card-header" data-toggle="collapse" data-target="#collapseEvo">
-            Evolve
+            <span>Evolve</span>
+            <span class="float-right text-black-50">Phase.<%=data.phase %></span>
         </div>
         <div id="collapseEvo" class="collapse" data-parent="#gearExtraInfo">
             <div class="card-body p-0">
