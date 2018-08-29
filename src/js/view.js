@@ -212,7 +212,10 @@ var render = function (type) {
                         {
                             title: "Desc",
                             width: "20rem",
-                            data: 'shortDesc',
+                            data: function (row, type, set, meta) {
+                                return row.shortDesc || "";
+                            },
+                            orderable: false,
                             render: function (data, type, row, meta) {
                                 return Ui.renderDesc(data);
                             }
@@ -262,7 +265,10 @@ var render = function (type) {
                         {
                             title: "Desc",
                             width: "20rem",
-                            data: 'shortDesc',
+                            data: function (row, type, set, meta) {
+                                return row.shortDesc || "";
+                            },
+                            orderable: false,
                             render: function (data, type, row, meta) {
                                 return Ui.renderDesc(data);
                             }

@@ -95,17 +95,31 @@
                                         </legend>
                                         <div class="row">
                                             <div class="col">
-                                                <span>Count:</span>
-                                                <%=aSkill.activateLimit %>
+                                                <span>Freeze:</span>
+                                                <%=aSkill.freezeTime %>s
                                             </div>
                                             <div class="col">
-                                                <span>CD:</span>
-                                                <%=aSkill.coolTime %>
+                                                <span>Count:</span>
+                                                <%=aSkill.activateLimit %>
                                             </div>
                                             <div class="col">
                                                 <span>ATK:</span>
                                                 <%=data.longAtkMax %>
                                                     <%=Ui.renderAttrText(data.longAttrMax) %>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <span>Invincible:</span>
+                                                <%=aSkill.invincibleTime %>s
+                                            </div>
+                                            <div class="col">
+                                                <span>Duration:</span>
+                                                <%=aSkill.effectTime %>s
+                                            </div>
+                                            <div class="col">
+                                                <span>Cooldown:</span>
+                                                <%=aSkill.coolTime %>s
                                             </div>
                                         </div>
                                         <div>
