@@ -304,20 +304,22 @@ var detail = function (type, id) {
 
     data.evoFrom = _.map(_.filter(Data.getAll("recipe"), function (o) { return o.remodelId == data.id }),
         function (o) {
-            return _.extend({
+            return _.extend({}, Data.get(type, o.catalogId),{
                 evoMaterials: _.orderBy(_.map(o.materials, function (p, i) {
                     return [Data.get("material", i), p];
-                }), function (p) { return p[0].sortPriority })
-            }, Data.get(type, o.catalogId));
+                }), function (p) { return p[0].sortPriority }),
+                evoDesc: o.evoDesc
+            });
         });
 
     data.evoTo = _.map(_.filter(Data.getAll("recipe"), function (o) { return o.catalogId == data.id }),
         function (o) {
-            return _.extend({
+            return _.extend({}, Data.get(type, o.catalogId),{
                 evoMaterials: _.orderBy(_.map(o.materials, function (p, i) {
                     return [Data.get("material", i), p];
-                }), function (p) { return p[0].sortPriority })
-            }, Data.get(type, o.remodelId));
+                }), function (p) { return p[0].sortPriority }),
+                evoDesc: o.evoDesc
+            });
         });
 
     var company = Data.get('company', data.company);
