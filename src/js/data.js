@@ -2,7 +2,7 @@ import localForage from "localforage";
 
 var data = {};
 
-const version = 21451;
+const version = 21478;
 var getVersion = function () { return version; };
 
 const baseKey = "MI_Gear_";
@@ -40,49 +40,49 @@ var init = function (forceInit) {
                 import (
                     /* webpackChunkName: "jsondata" */
                     '../data/actress.json').then(jsondata => {
-                    return savedata('actress', jsondata);
+                    return savedata('actress', jsondata.default);
                 }));
             promises.push(
                 import (
                     /* webpackChunkName: "jsondata" */
                     '../data/weapon.json').then(jsondata => {
-                    return savedata('weapon', jsondata);
+                    return savedata('weapon', jsondata.default);
                 }));
             promises.push(
                 import (
                     /* webpackChunkName: "jsondata" */
                     '../data/equipment.json').then(jsondata => {
-                    return savedata('equipment', jsondata);
+                    return savedata('equipment', jsondata.default);
                 }));
             promises.push(
                 import (
                     /* webpackChunkName: "jsondata" */
                     '../data/skillactive.json').then(jsondata => {
-                    return savedata('skillactive', jsondata);
+                    return savedata('skillactive', jsondata.default);
                 }));
             promises.push(
                 import (
                     /* webpackChunkName: "jsondata" */
                     '../data/skillpassive.json').then(jsondata => {
-                    return savedata('skillpassive', jsondata);
+                    return savedata('skillpassive', jsondata.default);
                 }));
             promises.push(
                 import (
                     /* webpackChunkName: "jsondata" */
                     '../data/recipe.json').then(jsondata => {
-                    return savedata('recipe', jsondata);
+                    return savedata('recipe', jsondata.default);
                 }));
             promises.push(
                 import (
                     /* webpackChunkName: "jsondata" */
                     '../data/material.json').then(jsondata => {
-                    return savedata('material', jsondata);
+                    return savedata('material', jsondata.default);
                 }));
             promises.push(
                 import (
                     /* webpackChunkName: "jsondata" */
                     '../data/company.json').then(jsondata => {
-                    return savedata('company', jsondata);
+                    return savedata('company', jsondata.default);
                 }));
             return Promise.all(promises).then(() => {
                 return saveLastUpdate();
@@ -97,7 +97,7 @@ var isDataOutdated = function () {
         lastUpdate = data;
         return import ('../data/lastUpdate.json').then(data => {
             var local = lastUpdate;
-            var remote = data;
+            var remote = data.default;
             var isLatest = new Date(local).getTime() >= new Date(remote).getTime();
             lastUpdate = remote;
             if (!local) {
