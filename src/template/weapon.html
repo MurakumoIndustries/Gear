@@ -1,5 +1,6 @@
 <div style="position:absolute;right:3rem;top:-4rem;">
-    <span class="text-black-50"><%=company.name %></span>
+    <span class="text-black-50">
+        <%=company.name %></span>
     <img class="icon icon-company" src="<%=company.icon ? '../img/com/' + company.icon + '.png' : " " %>" title="<%=company.name %>" alt="<%=company.name %>">
 </div>
 <div class="media mb-2">
@@ -37,11 +38,11 @@
                     <% 
                     switch (data.category) {
                         case 1: %>
-                        <%=data.shortAtkMax %>
-                            <%break;
+                    <%=data.shortAtkMax %>
+                    <%break;
                         case 2: %>
-                                <%=data.longAtkMax %>
-                                    <%break;
+                    <%=data.longAtkMax %>
+                    <%break;
                         default:break;
                     }
                      %>
@@ -52,11 +53,11 @@
                     <% 
                         switch (data.category) {
                             case 1: %>
-                        <%=Ui.renderAttrText(data.shortAttrMax) %>
-                            <%break;
+                    <%=Ui.renderAttrText(data.shortAttrMax) %>
+                    <%break;
                             case 2: %>
-                                <%=Ui.renderAttrText(data.longAttrMax) %>
-                                    <%break;
+                    <%=Ui.renderAttrText(data.longAttrMax) %>
+                    <%break;
                             default:break;
                         }
                          %>
@@ -76,10 +77,41 @@
             </div>
         </div>
     </div>
+    <% if(data.passiveSkills.length){ %>
+    <div class="card mb-2">
+        <div class="card-header" data-toggle="collapse" data-target="#collapsePassiveSkill">
+            Passive Skill
+        </div>
+        <div id="collapsePassiveSkill" class="collapse" data-parent="#gearExtraInfo">
+            <div class="card-body">
+                <% _.each(data.passiveSkills,function(o,i){
+                        var pSkill=Data.get('skillpassive',o.id);
+                        %>
+                <div class="row mb-1">
+                    <div class="col-auto">
+                        <span class='font-weight-light'>Lv.
+                            <%=o.openLevel%>
+                        </span>
+                    </div>
+                    <div class="col">
+                        <h5>
+                            <%=pSkill.name %>
+                        </h5>
+                        <div>
+                            <%=Ui.renderDesc(pSkill.desc) %>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <% } %>
     <div class="card mb-2">
         <div class="card-header" data-toggle="collapse" data-target="#collapseEvo">
             <span>Evolve</span>
-            <span class="float-right text-black-50">Phase.<%=data.phase %></span>
+            <span class="float-right text-black-50">Phase.
+                <%=data.phase %></span>
         </div>
         <div id="collapseEvo" class="collapse" data-parent="#gearExtraInfo">
             <div class="card-body p-0">
@@ -87,8 +119,8 @@
                     <div class="col px-2 pt-2 pb-0 border-right">
                         <div id="collapseEvoFrom">
                             <% _.each(data.evoFrom,function(o,i){ %>
-                                <%=getEvoCard(type,0,o,data) %>
-                                    <% }) %>
+                            <%=getEvoCard(type,0,o,data) %>
+                            <% }) %>
                         </div>
                     </div>
                     <!-- <div class="d-none col-auto text-center">
@@ -103,8 +135,8 @@
                     <div class="col px-2 pt-2 pb-0">
                         <div id="collapseEvoTo">
                             <% _.each(data.evoTo,function(o,i){ %>
-                                <%=getEvoCard(type,1,data,o) %>
-                                    <% }) %>
+                            <%=getEvoCard(type,1,data,o) %>
+                            <% }) %>
                         </div>
                     </div>
                 </div>
