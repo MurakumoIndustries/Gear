@@ -7,6 +7,7 @@ import NProgress from 'nprogress';
 import DataTable from 'datatables.net';
 import 'datatables.net-bs4';
 import 'datatables.net-bs4/css/dataTables.bootstrap4.css'
+import Konami from 'Konami'
 
 var inited;
 var currentType;
@@ -55,8 +56,20 @@ var initControl = function () {
         }, 200);
     });
 
+    new Konami(function () {
+        setIsExperimentalMode(!getIsExperimentalMode());
+        location.reload();
+    });
+
     inited = true;
 };
+var getIsExperimentalMode = function () {
+    return localStorage["ExperimentalMode"] === "true" || sessionStorage["ExperimentalMode"] === "true";
+};
+var setIsExperimentalMode = function (value) {
+    sessionStorage["ExperimentalMode"] = value;
+};
+
 var search = function () {
     if ($.fn.DataTable.isDataTable('#dataTable')) {
         $('#dataTable').DataTable().ajax.reload();
@@ -344,6 +357,7 @@ var detail = function (type, id) {
                     Data: Data,
                     getGearImg: getGearImg,
                     getEvoCard: getEvoCard,
+                    isExperimentalMode: getIsExperimentalMode(),
                 });
                 $('#modal-body').html(html);
                 break;
@@ -359,6 +373,7 @@ var detail = function (type, id) {
                     Data: Data,
                     getGearImg: getGearImg,
                     getEvoCard: getEvoCard,
+                    isExperimentalMode: getIsExperimentalMode(),
                 });
                 $('#modal-body').html(html);
                 break;

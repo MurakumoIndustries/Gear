@@ -20,13 +20,14 @@
                     <%=data.cost %>
                 </div>
             </div>
-            <div class="col-8">
-                <div class="float-left">
-                    type
-                </div>
-                <div class="text-right">
-                    <%=data.type %>
-                </div>
+            <div class="col-auto">
+                <%=Ui.getText('geartype') %>
+            </div>
+            <div class="col text-right">
+                <%=Ui.getText(data.catalog==0?'weaponL':'weaponS',data.type) %>
+            </div>
+            <div class="col-auto">
+                <%=Ui.getText('attribute',data.attribute1st) %>
             </div>
         </div>
         <div class="row">
@@ -100,6 +101,15 @@
                         <div>
                             <%=Ui.renderDesc(pSkill.desc) %>
                         </div>
+                        <% if(isExperimentalMode){
+                            _.each(pSkill.detailList,function(text){ %>
+                        <div>
+                            <small class="text-black-50">
+                                <%=text %>
+                            </small>
+                        </div>
+                        <% });
+                    } %>
                     </div>
                 </div>
                 <% }) %>

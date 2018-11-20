@@ -35,6 +35,47 @@ data["officalannouncement"] = { "ja-JP": "お知らせ", "zh-TW": "遊戲公告"
 data["ui"] = { "ja-JP": "UI言語", "zh-TW": "界面語言", "en-US": "UI", "zh-CN": "界面语言" };
 data["data"] = { "ja-JP": "", "zh-TW": "資料語言", "en-US": "Data", "zh-CN": "数据语言" };
 
+data["geartype"] = {
+    "ja-JP": "ギア種別",
+    "zh-TW": "裝備類型",
+    "en-US": "Gear Type",
+    "zh-CN": "装备类型",
+};
+
+data["weapon"] = { "ja-JP": "武装", "zh-TW": "武器", "en-US": "Weapon", "zh-CN": "武器" }
+data["weaponL"] = {
+    1: { "ja-JP": "ライフル", "zh-TW": "步槍", "en-US": "Rifle", "zh-CN": "步枪" },
+    2: { "ja-JP": "バズーカ", "zh-TW": "火箭筒", "en-US": "Bazooka", "zh-CN": "火箭筒" },
+    3: { "ja-JP": "デュアル", "zh-TW": "雙槍", "en-US": "Twin", "zh-CN": "双枪" },
+    4: { "ja-JP": "スナイパー", "zh-TW": "狙擊", "en-US": "Sniper", "zh-CN": "狙击" },
+};
+data["weaponS"] = {
+    1: { "ja-JP": "両手剣", "zh-TW": "雙手劍", "en-US": "Sword", "zh-CN": "双手剑" },
+    2: { "ja-JP": "ハンマー", "zh-TW": "錘", "en-US": "Hammer", "zh-CN": "锤子" },
+    3: { "ja-JP": "ランス", "zh-TW": "長槍", "en-US": "Spear", "zh-CN": "长枪" },
+    4: { "ja-JP": "片手剣", "zh-TW": "單手劍", "en-US": "Dagger", "zh-CN": "单手剑" },
+    5: { "ja-JP": "ハンドガン", "zh-TW": "手槍", "en-US": "Handgun", "zh-CN": "手枪" },
+};
+
+data["attribute"] = {
+    "ja-JP": "属性",
+    "zh-TW": "屬性",
+    "en-US": "Attribute",
+    "zh-CN": "属性",
+    0: { "ja-JP": "打撃", "zh-TW": "打擊", "en-US": "Blow", "zh-CN": "打击" },
+    1: { "ja-JP": "斬撃", "zh-TW": "斬擊", "en-US": "Slash", "zh-CN": "斩击" },
+    2: { "ja-JP": "実弾", "zh-TW": "實彈", "en-US": "Bullet", "zh-CN": "实弹" },
+    3: { "ja-JP": "エネルギー", "zh-TW": "能量", "en-US": "Beam", "zh-CN": "能量" },
+    4: { "ja-JP": "無", "zh-TW": "無", "en-US": "Normal", "zh-CN": "无" },
+    5: { "ja-JP": "電撃", "zh-TW": "電擊", "en-US": "Thunder", "zh-CN": "电击" },
+    6: { "ja-JP": "重力", "zh-TW": "重力", "en-US": "Gravity", "zh-CN": "重力" },
+    7: { "ja-JP": "焼夷", "zh-TW": "燒夷", "en-US": "Fire", "zh-CN": "烧夷" },
+    8: { "ja-JP": "冷撃", "zh-TW": "冷擊", "en-US": "Ice", "zh-CN": "冷击" },
+    9: { "ja-JP": "撃光", "zh-TW": "", "en-US": "Light", "zh-CN": "" },
+    10: { "ja-JP": "崩壊", "zh-TW": "", "en-US": "Collapse", "zh-CN": "" },
+    11: { "ja-JP": "理論", "zh-TW": "", "en-US": "Theory", "zh-CN": "" },
+};
+
 data[""] = {
     "ja-JP": "",
     "zh-TW": "",
@@ -181,12 +222,19 @@ data["bootstrap-select_i18n"] = {
     },
 };
 
-var getText = function (key) {
+var getText = function (key, key2) {
     if (!data[key]) {
-        console.log("ui language data missing:" + key);
+        console.log("ui language data missing", key);
         return key;
     }
-    return data[key][getLang()] || data[key]['en-US'];
+    if (key2 === undefined) {
+        return data[key][getLang()] || data[key]['en-US'];
+    }
+    if (!data[key][key2]) {
+        console.log("ui language data missing", key, key2);
+        return key;
+    }
+    return data[key][key2][getLang()] || data[key][key2]['en-US'];
 };
 var getLang = function () {
     if (!currentLang) {

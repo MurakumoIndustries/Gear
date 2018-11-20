@@ -155,6 +155,15 @@
                             <div>
                                 <%=Ui.renderDesc(pSkill.desc) %>
                             </div>
+                            <% if(isExperimentalMode){
+                                _.each(pSkill.detailList,function(text){ %>
+                            <div>
+                                <small class="text-black-50">
+                                    <%=text %>
+                                </small>
+                            </div>
+                            <% });
+                        } %>
                         </div>
                     </div>
                     <% }) %>
