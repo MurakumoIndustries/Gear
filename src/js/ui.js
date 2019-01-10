@@ -35,6 +35,8 @@ data["officalannouncement"] = { "ja-JP": "お知らせ", "zh-TW": "遊戲公告"
 data["ui"] = { "ja-JP": "UI言語", "zh-TW": "界面語言", "en-US": "UI", "zh-CN": "界面语言" };
 data["data"] = { "ja-JP": "", "zh-TW": "資料語言", "en-US": "Data", "zh-CN": "数据语言" };
 
+data["server"] = { "ja-JP": "サーバー", "zh-TW": "伺服器", "en-US": "Server", "zh-CN": "服务器" };
+
 data["geartype"] = {
     "ja-JP": "ギア種別",
     "zh-TW": "裝備類型",

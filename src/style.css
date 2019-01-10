@@ -79,6 +79,13 @@ body {
     background-image: url(./img/version.png);
 }
 
+.icon.icon-murakumo {
+    width: 2.5rem;
+    height: 2.5rem;
+    vertical-align: middle;
+    background-image: url(./img/murakumo.png);
+}
+
 .icon.icon-gear {
     width: 4rem;
     height: 4rem;

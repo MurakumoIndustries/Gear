@@ -2,7 +2,7 @@ import $ from "jquery";
 import _ from 'lodash';
 import page from 'page';
 import Ui from './ui.js';
-import Data from './data.js';
+import { Data } from './data.js';
 import NProgress from 'nprogress';
 import DataTable from 'datatables.net';
 import 'datatables.net-bs4';
@@ -29,7 +29,15 @@ var clear = function () {
 };
 var initControl = function () {
     if (inited) { return; }
-    $('#version').text(Data.getVersion());
+    //$('#version').text(Data.getVersion());
+
+    var currentServer = Data.getCurrentServer();
+    $('#server').text(currentServer.name);
+    $('#version').text(currentServer.version);
+    $.each(Data.getAllServers(), function (i, o) {
+        $('#serverDivider').before('<a class="dropdown-item ' + (i == currentServer.id ? 'active' : '') + '" href="#!/server/' + i + '">' + o.name +
+            '<p class="m-0" style="font-size:0.75rem;line-height:0.75rem;">' + o.version + '</p>' + '</a>');
+    });
 
     $('input[type=radio][name=GearType]').change(function () {
         page.redirect("/" + this.value);
