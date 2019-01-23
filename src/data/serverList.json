@@ -5,5 +5,11 @@
         "folder": "pyramid",
         "version": "22016",
         "isDefault": true
+    },
+    "sonet": {
+        "id": "sonet",
+        "name": "So-net",
+        "folder": "sonet",
+        "version": "7"
     }
 }
