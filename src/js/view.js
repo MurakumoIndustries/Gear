@@ -46,9 +46,18 @@ var initControl = function () {
     var actressList = Data.getAll("actress");
     _.each(actressList, function (o, i) {
         var text = o.name + "|" + o.age;
-        $('#searchActress').append('<option value="' + o.id + '" data-tokens="' + text + '">' + text);
+        
+        var datacontent = '<img class="icon icon-option" src="' + (o.miniIcon ? '../img/chara/' + o.miniIcon + '.png' : "") + '">' + text;
+        $('#searchActress').append($('<option value="' + o.id + '" data-tokens="' + text + '">' + text).attr('data-content', datacontent));
     });
     $('#searchActress').selectpicker('refresh');
+
+    var companyList = Data.getAll("company");
+    _.each(companyList, function (o, i) {
+        var datacontent = '<img class="icon icon-option" src="' + (o.icon ? '../img/com/' + o.icon + '.png' : "") + '">' + o.name;
+        $('#searchCompany').append($('<option value="' + o.id + '" data-tokens="' + o.name + '">' + o.name).attr('data-content', datacontent));
+    });
+    $('#searchCompany').selectpicker('refresh');
     //search control
     var inputTimeout;
     $('#searchContainer input').keyup(function () {
@@ -90,6 +99,7 @@ var getData = function (type) {
         name: $('#searchName').val(),
         rare: $('#searchRare').val(),
         actress: $('#searchActress').val(),
+        company: $('#searchCompany').val(),
     }
     raw = _.filter(raw, function (o, i) {
         if (param.name && o.name.toLowerCase().indexOf(param.name.toLowerCase()) < 0) {
@@ -99,6 +109,9 @@ var getData = function (type) {
             return false;
         }
         if (param.actress.length && param.actress.indexOf(String(o.actressId)) < 0) {
+            return false;
+        }
+        if (param.company.length && param.company.indexOf(String(o.company)) < 0) {
             return false;
         }
         return true;

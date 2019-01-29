@@ -115,6 +115,12 @@ body {
     vertical-align: bottom;
 }
 
+.icon.icon-option {
+    width: 1.5rem !important;
+    height: 1.5rem !important;
+    vertical-align: middle;
+}
+
 .icon.icon-version {
     width: 2.5rem;
     height: 2.5rem;
