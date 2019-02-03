@@ -46,7 +46,7 @@ var initControl = function () {
     var actressList = Data.getAll("actress");
     _.each(actressList, function (o, i) {
         var text = o.name + "|" + o.age;
-        
+
         var datacontent = '<img class="icon icon-option" src="' + (o.miniIcon ? '../img/chara/' + o.miniIcon + '.png' : "") + '">' + text;
         $('#searchActress').append($('<option value="' + o.id + '" data-tokens="' + text + '">' + text).attr('data-content', datacontent));
     });
@@ -59,19 +59,9 @@ var initControl = function () {
     });
     $('#searchCompany').selectpicker('refresh');
     //search control
-    var inputTimeout;
-    $('#searchContainer input').keyup(function () {
-        clearTimeout(inputTimeout);
-        inputTimeout = setTimeout(function () {
-            search();
-        }, 200);
-    });
-    $('#searchContainer select').change(function () {
-        clearTimeout(inputTimeout);
-        inputTimeout = setTimeout(function () {
-            search();
-        }, 200);
-    });
+    $('#searchContainer input').keyup(_.debounce(search, 500));
+    $('#searchContainer input').change(_.debounce(search, 500));
+    $('#searchContainer select').change(_.debounce(search, 500));
 
     new Konami(function () {
         setIsExperimentalMode(!getIsExperimentalMode());
@@ -97,12 +87,22 @@ var getData = function (type) {
     //filter raw
     var param = {
         name: $('#searchName').val(),
+        category: $('#searchCategory').val(),
+        type: $('#searchType').val(),
         rare: $('#searchRare').val(),
         actress: $('#searchActress').val(),
         company: $('#searchCompany').val(),
+        series: $('#searchSeries').val(),
+        excludeDefault: $('#searchExcludeDefault').prop('checked'),
     }
     raw = _.filter(raw, function (o, i) {
         if (param.name && o.name.toLowerCase().indexOf(param.name.toLowerCase()) < 0) {
+            return false;
+        }
+        if (param.category && o.category != param.category) {
+            return false;
+        }
+        if (param.type && o.type != param.type) {
             return false;
         }
         if (param.rare && o.rare != param.rare) {
@@ -112,6 +112,12 @@ var getData = function (type) {
             return false;
         }
         if (param.company.length && param.company.indexOf(String(o.company)) < 0) {
+            return false;
+        }
+        if (param.series.length && o.armaSeriesId && param.series.indexOf(String(o.armaSeriesId)) < 0) {
+            return false;
+        }
+        if (param.excludeDefault && o.isDefault) {
             return false;
         }
         return true;

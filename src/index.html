@@ -89,6 +89,27 @@
                             <div class="col-9 col-lg-3 mb-2">
                                 <input type="text" class=" form-control" id="searchName" placeholder="Name">
                             </div>
+                            <label class="col-3 col-lg-1 col-form-label" for="searchCategory">Category</label>
+                            <div class="col-9 col-lg-3 mb-2">
+                                <select class="selectpicker" id="searchCategory" data-width="100%">
+                                    <option value="">All</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                            <label class="col-3 col-lg-1 col-form-label" for="searchType">Type</label>
+                            <div class="col-9 col-lg-3 mb-2">
+                                <select class="selectpicker" id="searchType" data-width="100%">
+                                    <option value="">All</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group form-row mb-0">
                             <label class="col-3 col-lg-1 col-form-label" for="searchRare">Rare</label>
                             <div class="col-9 col-lg-3 mb-2">
                                 <select class="selectpicker" id="searchRare" data-width="100%">
@@ -105,31 +126,31 @@
                                     <option value="0">General</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group form-row mb-0">
                             <label class="col-3 col-lg-1 col-form-label" for="searchCompany">Company</label>
                             <div class="col-9 col-lg-3 mb-2">
                                 <select class="selectpicker" id="searchCompany" multiple="multiple" data-live-search="true" data-width="100%" data-size="8" data-actions-box="true">
                                 </select>
                             </div>
-                            <!--<label class="col-3 col-lg-1 col-form-label" for="searchName">Name</label>
+                        </div>
+                        <div class="form-group form-row mb-0">
+                            <label class="col-3 col-lg-1 col-form-label" for="searchSeries">Series</label>
                             <div class="col-9 col-lg-3 mb-2">
-                                <input type="text" class=" form-control" id="searchName" placeholder="Name">
-                            </div>
-                            <label class="col-3 col-lg-1 col-form-label" for="searchRare">Rare</label>
-                            <div class="col-9 col-lg-3 mb-2">
-                                <select class="selectpicker" id="searchRare" data-width="100%">
+                                <select class="selectpicker" id="searchSeries" data-width="100%">
                                     <option value="">All</option>
-                                    <option value="4">★★★★</option>
-                                    <option value="3">★★★</option>
-                                    <option value="2">★★</option>
-                                    <option value="1">★</option>
+                                    <option value="1702479047">Original</option>
+                                    <option value="2086860166">Strike Witches</option>
                                 </select>
                             </div>
-                            <label class="col-3 col-lg-1 col-form-label" for="searchActress">Name</label>
-                            <div class="col-9 col-lg-3 mb-2">
-                                <input type="text" class=" form-control" id="searchName" placeholder="Name">
-                            </div>-->
+                        </div>
+                        <div class="form-group form-row mb-0">
+                            <div class="col-12 col-lg-4 mb-2">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="searchExcludeDefault">
+                                        <input class="form-check-input" type="checkbox" value="true" id="searchExcludeDefault" checked="checked">
+                                        Exclude Default
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
