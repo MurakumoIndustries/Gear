@@ -96,7 +96,7 @@ var getData = function (type) {
         excludeDefault: $('#searchExcludeDefault').prop('checked'),
     }
     raw = _.filter(raw, function (o, i) {
-        if (param.name && o.name.toLowerCase().indexOf(param.name.toLowerCase()) < 0) {
+        if (param.name && (o.name || "").toLowerCase().indexOf(param.name.toLowerCase()) < 0) {
             return false;
         }
         if (param.category && o.category != param.category) {
