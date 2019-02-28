@@ -75,7 +75,7 @@ module.exports = env => {
             ]
         },
         plugins: [
-            new CleanWebpackPlugin(['docs']),
+            new CleanWebpackPlugin(['docs'], { exclude: ['.nojekyll'] }),
             new HtmlWebpackPlugin({
                 template: './src/index.html'
             }),
