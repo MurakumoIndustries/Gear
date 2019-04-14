@@ -3,6 +3,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OfflinePlugin = require('offline-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 module.exports = env => {
     console.log('NODE_ENV: ', env.NODE_ENV) // true
@@ -11,6 +13,39 @@ module.exports = env => {
     }
     else {
         console.log("debug");
+    }
+    var plugins = [
+        new CleanWebpackPlugin(['docs'], { exclude: ['.nojekyll'] }),
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        }),
+        new MiniCssExtractPlugin({
+            filename: "[name].[contenthash].css",
+            chunkFilename: "[id].[contenthash].css"
+        }),
+    ];
+    if (env.NODE_ENV === 'production') {
+        plugins.push(
+            new WebpackPwaManifest({
+                name: "MI|Gear",
+                short_name: "MI|Gear",
+                theme_color: "#FAFAFA",
+                background_color: '#FAFAFA',
+                icons: [{
+                    src: path.resolve('./src/img/murakumo.png'),
+                    sizes: [96, 128, 192, 256, 384, 512, 1024] // multiple sizes
+                }]
+            })
+        );
+        plugins.push(new OfflinePlugin({
+            appShell: '/Gear/',
+            autoUpdate: true,
+            ServiceWorker: {
+                cacheName: "MI_Gear",
+                events: true,
+                entry: path.join(__dirname, './src/js/sw-img.js')
+            }
+        }));
     }
 
     return {
@@ -74,15 +109,6 @@ module.exports = env => {
                 }
             ]
         },
-        plugins: [
-            new CleanWebpackPlugin(['docs'], { exclude: ['.nojekyll'] }),
-            new HtmlWebpackPlugin({
-                template: './src/index.html'
-            }),
-            new MiniCssExtractPlugin({
-                filename: "[name].[contenthash].css",
-                chunkFilename: "[id].[contenthash].css"
-            }),
-        ]
+        plugins: plugins
     }
 };

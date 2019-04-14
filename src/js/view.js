@@ -45,7 +45,7 @@ var initControl = function () {
 
     var actressList = Data.getAll("actress");
     _.each(actressList, function (o, i) {
-        var text = o.name + "|" + o.age;
+        var text = o.name;
 
         var datacontent = '<img class="icon icon-option" src="' + (o.miniIcon ? '../img/chara/' + o.miniIcon + '.png' : "") + '">' + text;
         $('#searchActress').append($('<option value="' + o.id + '" data-tokens="' + text + '">' + text).attr('data-content', datacontent));
