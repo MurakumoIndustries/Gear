@@ -152,11 +152,24 @@
                 </div>
             </div>
         </div>
-        <VuetablePaginationBootstrap
-            ref="pagination"
-            class="float-right mb-2"
-            @vuetable-pagination:change-page="onChangePage"
-        />
+        <div class="row mb-2">
+            <div class="col">
+                <div class="btn-group">
+                    <button
+                        v-for="size in [10,25,50,100]"
+                        :key="size"
+                        type="button"
+                        :class="['btn','btn-light',{'active':pageSize==size}]"
+                        @click="pageSize=size"
+                    >{{size}}</button>
+                </div>
+            </div>
+            <VuetablePaginationBootstrap
+                ref="pagination"
+                class="col-auto text-right"
+                @vuetable-pagination:change-page="onChangePage"
+            />
+        </div>
         <Vuetable
             ref="vuetable"
             :css="css.table"
@@ -201,11 +214,24 @@
                 <div v-html="Ui.renderDesc(props.rowData.shortDesc||'')"></div>
             </template>
         </Vuetable>
-        <VuetablePaginationBootstrap
-            ref="paginationBottom"
-            class="float-right mt-2"
-            @vuetable-pagination:change-page="onChangePage"
-        />
+        <div class="row my-2">
+            <div class="col">
+                <div class="btn-group">
+                    <button
+                        v-for="size in [10,25,50,100]"
+                        :key="size"
+                        type="button"
+                        :class="['btn','btn-light',{'active':pageSize==size}]"
+                        @click="pageSize=size"
+                    >{{size}}</button>
+                </div>
+            </div>
+            <VuetablePaginationBootstrap
+                ref="paginationBottom"
+                class="float-right"
+                @vuetable-pagination:change-page="onChangePage"
+            />
+        </div>
         <Detail/>
     </div>
 </template>
@@ -295,6 +321,12 @@ export default {
                 this.search();
             },
             deep: true
+        },
+        pageSize: function() {
+            var $vm = this;
+            $vm.$nextTick(function() {
+                $vm.$refs.vuetable.refresh();
+            });
         }
     },
     computed: {
@@ -331,40 +363,41 @@ export default {
             this.$refs.vuetable.changePage(page);
         },
         fields: function(gearType) {
-            var fields = [];
+            var fields = [
+                {
+                    name: "__slot:icon",
+                    title: ""
+                },
+                {
+                    name: "__slot:name",
+                    title: "Name",
+                    sortField: "name"
+                },
+                {
+                    name: "cost",
+                    sortField: "cost"
+                },
+                {
+                    name: "__slot:rare",
+                    title: "Rare",
+                    sortField: "rare"
+                },
+                {
+                    name: "category",
+                    sortField: "category"
+                },
+                {
+                    name: "type",
+                    sortField: "type"
+                },
+                {
+                    name: "maxLv",
+                    sortField: "maxLv"
+                }
+            ];
             switch (gearType) {
                 case "weapon":
-                    fields = [
-                        {
-                            name: "__slot:icon",
-                            title: ""
-                        },
-                        {
-                            name: "__slot:name",
-                            title: "Name",
-                            sortField: "name"
-                        },
-                        {
-                            name: "cost",
-                            sortField: "cost"
-                        },
-                        {
-                            name: "__slot:rare",
-                            title: "Rare",
-                            sortField: "rare"
-                        },
-                        {
-                            name: "category",
-                            sortField: "category"
-                        },
-                        {
-                            name: "type",
-                            sortField: "type"
-                        },
-                        {
-                            name: "maxLv",
-                            sortField: "maxLv"
-                        },
+                    fields = fields.concat([
                         {
                             name: "__slot:atk",
                             title: "Atk",
@@ -386,40 +419,10 @@ export default {
                             title: "Desc",
                             dataClass: "text-nowrap"
                         }
-                    ];
+                    ]);
                     break;
                 case "equipment":
-                    fields = [
-                        {
-                            name: "__slot:icon",
-                            title: ""
-                        },
-                        {
-                            name: "__slot:name",
-                            title: "Name",
-                            sortField: "name"
-                        },
-                        {
-                            name: "cost",
-                            sortField: "cost"
-                        },
-                        {
-                            name: "__slot:rare",
-                            title: "Rare",
-                            sortField: "rare"
-                        },
-                        {
-                            name: "category",
-                            sortField: "category"
-                        },
-                        {
-                            name: "type",
-                            sortField: "type"
-                        },
-                        {
-                            name: "maxLv",
-                            sortField: "maxLv"
-                        },
+                    fields = fields.concat([
                         {
                             name: "hpMax",
                             title: "HP",
@@ -446,7 +449,7 @@ export default {
                             title: "Desc",
                             dataClass: "text-nowrap"
                         }
-                    ];
+                    ]);
                     break;
                 default:
                     break;
