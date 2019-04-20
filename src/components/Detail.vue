@@ -50,7 +50,7 @@ export default {
             $vm.$nextTick(function() {
                 $($vm.$el).modal("show");
                 $($vm.$el).on("hide.bs.modal", function() {
-                    page.show("/");
+                    page.show("/" + $vm.gearType);
                 });
             });
         });

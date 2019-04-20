@@ -85,7 +85,7 @@
                                     data-size="8"
                                     data-actions-box="true"
                                 >
-                                    <option value="0">General</option>
+                                    <option :value="0">General</option>
                                     <option
                                         v-for="actress in actressList"
                                         v-bind:key="actress.id"
@@ -488,20 +488,20 @@ export default {
                 }
                 if (
                     $vm.filters.actressId.length &&
-                    $vm.filters.actressId.indexOf(String(o.actressId)) < 0
+                    $vm.filters.actressId.indexOf(o.actressId) < 0
                 ) {
                     return false;
                 }
                 if (
                     $vm.filters.company.length &&
-                    $vm.filters.company.indexOf(String(o.company)) < 0
+                    $vm.filters.company.indexOf(o.company) < 0
                 ) {
                     return false;
                 }
                 if (
                     $vm.filters.armaSeriesId.length &&
                     o.armaSeriesId &&
-                    $vm.filters.armaSeriesId.indexOf(String(o.armaSeriesId)) < 0
+                    $vm.filters.armaSeriesId.indexOf(o.armaSeriesId) < 0
                 ) {
                     return false;
                 }

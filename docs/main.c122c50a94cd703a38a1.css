@@ -70,50 +70,6 @@ body {
 
 .attr-text.attr-theory {}
 
-
-.evo-container {
-    width: 6rem;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 0.25rem 0;
-}
-
-.evo-container.evo-container-current {
-    background: #ccc;
-}
-
-/* icons */
-
-.icon.icon-company {
-    width: 4rem;
-    height: 4rem;
-    vertical-align: middle;
-}
-
-.icon.icon-item {
-    width: 4rem;
-    height: 4rem;
-}
-
-.item-container {
-    display: inline-block;
-    margin-right: 0.25rem;
-    text-align: center;
-    position: relative;
-}
-
-.item-container:last-of-type {
-    margin-right: 0;
-}
-
-.item-container .item-count {
-    position: absolute;
-    bottom: 0;
-    right: 0.25rem;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    color: #000;
-    font-size: 0.9rem;
-}
 /* Make clicks pass-through */
 #nprogress {
   pointer-events: none;

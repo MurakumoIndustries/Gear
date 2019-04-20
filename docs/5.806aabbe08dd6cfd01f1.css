@@ -43,6 +43,43 @@
 }
 
 
+.item-container[data-v-ee44ec06] {
+    display: inline-block;
+    margin-right: 0.25rem;
+    text-align: center;
+    position: relative;
+}
+.item-container[data-v-ee44ec06]:last-of-type {
+    margin-right: 0;
+}
+.item-container .item-count[data-v-ee44ec06] {
+    position: absolute;
+    bottom: 0;
+    right: 0.25rem;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color: #000;
+    font-size: 0.9rem;
+}
+.icon-item[data-v-ee44ec06] {
+    width: 4rem;
+    height: 4rem;
+}
+
+
+.icon-company[data-v-61596b7d] {
+    width: 4rem;
+    height: 4rem;
+    vertical-align: middle;
+}
+
+
+.icon-company[data-v-a82ac886] {
+    width: 4rem;
+    height: 4rem;
+    vertical-align: middle;
+}
+
+
 .main-container[data-v-0850b3ff] {
     padding-top: 56px;
 }
