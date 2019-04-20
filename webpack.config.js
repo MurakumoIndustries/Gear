@@ -1,10 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OfflinePlugin = require('offline-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = env => {
     console.log('NODE_ENV: ', env.NODE_ENV) // true
@@ -16,6 +18,7 @@ module.exports = env => {
     }
     var plugins = [
         new CleanWebpackPlugin(['docs'], { exclude: ['.nojekyll'] }),
+        new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
@@ -23,21 +26,17 @@ module.exports = env => {
             filename: "[name].[contenthash].css",
             chunkFilename: "[id].[contenthash].css"
         }),
-    ];
-    if (env.NODE_ENV === 'production') {
-        plugins.push(
-            new WebpackPwaManifest({
-                name: "MI|Gear",
-                short_name: "MI|Gear",
-                theme_color: "#FAFAFA",
-                background_color: '#FAFAFA',
-                icons: [{
-                    src: path.resolve('./src/img/murakumo.png'),
-                    sizes: [96, 128, 192, 256, 384, 512, 1024] // multiple sizes
-                }]
-            })
-        );
-        plugins.push(new OfflinePlugin({
+        new WebpackPwaManifest({
+            name: "MI|Gear",
+            short_name: "MI|Gear",
+            theme_color: "#FAFAFA",
+            background_color: '#FAFAFA',
+            icons: [{
+                src: path.resolve('./src/img/murakumo.png'),
+                sizes: [96, 128, 192, 256, 384, 512, 1024] // multiple sizes
+            }]
+        }),
+        new OfflinePlugin({
             appShell: '/Gear/',
             autoUpdate: true,
             ServiceWorker: {
@@ -45,8 +44,9 @@ module.exports = env => {
                 events: true,
                 entry: path.join(__dirname, './src/js/sw-img.js')
             }
-        }));
-    }
+        }),
+    ];
+    //    plugins.push(new BundleAnalyzerPlugin());
 
     return {
         mode: env.NODE_ENV || 'production',
@@ -65,6 +65,11 @@ module.exports = env => {
                 //chunks: 'all'
             }
         },
+        resolve: {
+            alias: env.NODE_ENV !== 'production' ? {
+                'vue$': 'vue/dist/vue.esm.js'
+            } : {}
+        },
         module: {
             rules: [{
                     test: /\.(ttf|eot|woff|woff2)$/,
@@ -75,7 +80,8 @@ module.exports = env => {
                 },
                 {
                     test: /\.css$/,
-                    use: [{
+                    use: [
+                        env.NODE_ENV !== 'production' ? 'vue-style-loader' : {
                             loader: MiniCssExtractPlugin.loader,
                             options: {
                                 // you can specify a publicPath here
@@ -96,16 +102,15 @@ module.exports = env => {
                     }]
                 },
                 {
-                    test: /\.(tpl|html)$/,
-                    include: [
-                        path.resolve(__dirname, "src/template")
-                    ],
-                    use: [{
-                        loader: 'underscore-template-loader',
-                        options: {
-                            globalLodash: true,
-                        }
-                    }]
+                    test: /\.vue$/,
+                    loader: 'vue-loader',
+                    options: {
+                        loaders: {
+
+                        },
+                        extractCSS: true,
+                        // other vue-loader options go here
+                    }
                 }
             ]
         },

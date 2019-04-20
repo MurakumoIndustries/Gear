@@ -1,19 +1,5 @@
-html {
-    height: 100%;
-}
-
 body {
     font-family: -apple-system, "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "Source Han Sans SC", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
-    height: 100%;
-}
-
-.panel-heading {
-    cursor: pointer;
-}
-
-#main {
-    padding-top: 56px;
-    position: relative;
 }
 
 .attr-text.attr-normal {}
@@ -40,13 +26,6 @@ body {
 
 .attr-text.attr-theory {}
 
-.evo-type-text {
-    white-space: nowrap;
-    text-align: center;
-    line-height: 1rem;
-    font-size: 0.75rem;
-    min-height: 1rem;
-}
 
 .evo-container {
     width: 6rem;
@@ -60,69 +39,6 @@ body {
 }
 
 /* icons */
-
-.icon {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    display: inline-block;
-    width: 1.5rem;
-    height: 1.5rem;
-    vertical-align: bottom;
-}
-
-.icon.icon-option {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-    vertical-align: middle;
-}
-
-.icon.icon-version {
-    width: 2.5rem;
-    height: 2.5rem;
-    opacity: 0.5;
-    vertical-align: middle;
-    background-image: url(./img/version.png);
-}
-
-.icon.icon-murakumo {
-    width: 2.5rem;
-    height: 2.5rem;
-    vertical-align: middle;
-    background-image: url(./img/murakumo.png);
-}
-
-.icon.icon-gear {
-    width: 4rem;
-    height: 4rem;
-}
-
-.icon-gear-container {
-    display: inline-block;
-    position: relative;
-}
-
-.icon-gear-container a,
-.icon-gear-container a:hover {
-    text-decoration: none;
-}
-
-.icon-gear-container .icon-gear-memoca-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.icon-gear-container .icon-gear-memoca-container .memoca-slot {
-    width: 5px;
-    height: 12px;
-    margin-top: 12px;
-    margin-right: 1px;
-    background: black;
-    border-color: rgba(255, 255, 255, 0.9);
-    border-style: solid;
-    border-width: 1px 0 1px 1px;
-}
 
 .icon.icon-company {
     width: 4rem;

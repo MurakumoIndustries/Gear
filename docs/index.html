@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
 
 <head>
     <meta charset="utf-8">
@@ -9,170 +9,14 @@
     <title>*α*MI|Gear</title>
     <meta name="description" content="Murakumo Industries|Gear List" />
     <meta name="keywords" content="Alice Gear Aegis,Murakumo Industries,Gear List">
-<meta name="theme-color" content="#FAFAFA" /><link rel="manifest" href="manifest.49b68d4bd4d0c9795448cf3d84d1db7f.json" /><link href="main.c5c5ee29628c1be38e99.css" rel="stylesheet"></head>
+<meta name="theme-color" content="#FAFAFA" /><link rel="manifest" href="manifest.49b68d4bd4d0c9795448cf3d84d1db7f.json" /><link href="main.3876e1346ea477e2c646.css" rel="stylesheet"></head>
 
-<body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <a class="pr-2" href="../"><i class="icon icon-murakumo"></i></a>
-        <a class="navbar-brand " title="Murakumo Industries Gear List" href="#">
-            <span class="d-none d-xl-inline-block">Murakumo Industries</span>
-            <span class="d-none d-lg-inline-block d-xl-none">MI</span>
-            <span class="d-none d-sm-inline-block d-md-inline-block d-lg-none">Murakumo Industries</span>
-            <span class="d-sm-none">MI</span>
-            <span>Gear</span>
-            <span class="d-none d-sm-inline-block">List</span>
-            <sup>α</sup>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <form class="form-inline">
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-light">
-                            <input type="radio" name="GearType" id="GearTypeWeapon" value="weapon" autocomplete="off">
-                            <span data-lang="weapon"></span>
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="GearType" id="GearTypeEquipment" value="equipment" autocomplete="off">
-                            <span data-lang="equipment"></span>
-                        </label>
-                    </div>
-                </form>
-            </ul>
-
-            <ul class="navbar-nav my-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle py-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="icon icon-version"></i>
-                        <div class="d-inline-block" style="vertical-align: middle;">
-                            <div id="server"></div>
-                            <div class="m-0" style="font-size: 0.75rem;line-height:0.75rem;" id="version"></div>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <h6 class="dropdown-header" data-lang="server">Server</h6>
-                        <div class="dropdown-divider" id="serverDivider"></div>
-                        <h6 class="dropdown-header" data-lang="externallink">Link</h6>
-                        <a class="dropdown-item" href="https://colopl.co.jp/alicegearaegis/" target="_blank" data-lang="officalsite">OfficalSite</a>
-                        <a class="dropdown-item" href="https://alice.colopl.jp/news/show" target="_blank" data-lang="officalannouncement">Offical Announcement</a>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="material-icons">language</i>
-                        <span id="currentLang"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="#!/lang/ja-JP">日本語</a>
-                        <a class="dropdown-item" href="#!/lang/zh-TW">正體中文</a>
-                        <a class="dropdown-item" href="#!/lang/en-US">English</a>
-                        <a class="dropdown-item" href="#!/lang/zh-CN">简体中文</a>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <div id="main" class="container-fluid">
-        <div class="card my-2">
-            <div style="cursor: pointer;" class="card-header" data-toggle="collapse" data-target="#collapseSearch">
-                <i class="material-icons">menu</i>
-                <span data-lang="search">Search</span>
-            </div>
-            <div id="collapseSearch" class="collapse">
-                <div class="card-body">
-                    <form id="searchContainer" onsubmit="return false;">
-                        <div class="form-group form-row mb-0">
-                            <label class="col-3 col-lg-1 col-form-label" for="searchName">Name</label>
-                            <div class="col-9 col-lg-3 mb-2">
-                                <input type="text" class=" form-control" id="searchName" placeholder="Name">
-                            </div>
-                            <label class="col-3 col-lg-1 col-form-label" for="searchCategory">Category</label>
-                            <div class="col-9 col-lg-3 mb-2">
-                                <select class="selectpicker" id="searchCategory" data-width="100%">
-                                    <option value="">All</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                </select>
-                            </div>
-                            <label class="col-3 col-lg-1 col-form-label" for="searchType">Type</label>
-                            <div class="col-9 col-lg-3 mb-2">
-                                <select class="selectpicker" id="searchType" data-width="100%">
-                                    <option value="">All</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group form-row mb-0">
-                            <label class="col-3 col-lg-1 col-form-label" for="searchRare">Rare</label>
-                            <div class="col-9 col-lg-3 mb-2">
-                                <select class="selectpicker" id="searchRare" data-width="100%">
-                                    <option value="">All</option>
-                                    <option value="4">★★★★</option>
-                                    <option value="3">★★★</option>
-                                    <option value="2">★★</option>
-                                    <option value="1">★</option>
-                                </select>
-                            </div>
-                            <label class="col-3 col-lg-1 col-form-label" for="searchActress">Actress</label>
-                            <div class="col-9 col-lg-3 mb-2">
-                                <select class="selectpicker" id="searchActress" multiple="multiple" data-live-search="true" data-width="100%" data-size="8" data-actions-box="true">
-                                    <option value="0">General</option>
-                                </select>
-                            </div>
-                            <label class="col-3 col-lg-1 col-form-label" for="searchCompany">Company</label>
-                            <div class="col-9 col-lg-3 mb-2">
-                                <select class="selectpicker" id="searchCompany" multiple="multiple" data-live-search="true" data-width="100%" data-size="8" data-actions-box="true">
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group form-row mb-0">
-                            <label class="col-3 col-lg-1 col-form-label" for="searchSeries">Series</label>
-                            <div class="col-9 col-lg-3 mb-2">
-                                <select class="selectpicker" id="searchSeries" data-width="100%">
-                                    <option value="">All</option>
-                                    <option value="1702479047">Original</option>
-                                    <option value="2086860166">Strike Witches</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group form-row mb-0">
-                            <div class="col-12 col-lg-4 mb-2">
-                                <div class="form-check">
-                                    <label class="form-check-label" for="searchExcludeDefault">
-                                        <input class="form-check-input" type="checkbox" value="true" id="searchExcludeDefault" checked="checked">
-                                        Exclude Default
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <table id="dataTable" style="min-width:1024px;width:100%" class="table table-bordered table-striped table-sm display"></table>
+<body class="h-100">
+    <div id="app">
     </div>
-    <div id="modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="modal-title" class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div id="modal-body" class="modal-body">
-
-                </div>
-            </div>
-        </div>
-    </div>
+    <noscript>
+        Murakumo Industries|Gear List
+    </noscript>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114331235-3"></script>
     <script>
@@ -183,6 +27,6 @@
 
         gtag('config', 'UA-114331235-3');
     </script>
-<script type="text/javascript" src="data.90a7ed2256227f6d1077.js"></script><script type="text/javascript" src="main.e45c7e19fb687761eab0.js"></script></body>
+<script type="text/javascript" src="data.b2c7ce78c7206562c079.js"></script><script type="text/javascript" src="main.2e59ad15b888d861e9fb.js"></script></body>
 
 </html>
