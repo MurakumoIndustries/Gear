@@ -25,14 +25,6 @@ var clear = function () {
 var initControl = function () {
     if (inited) { return; }
 
-    var $vm = new Vue({
-        el: '#app',
-        //template: '<App/>',
-        render: function (h) {
-            return h('App')
-        },
-        components: { App }
-    });
     Vue.prototype.isExperimentalMode = function () {
         return getIsExperimentalMode();
     };
@@ -40,6 +32,15 @@ var initControl = function () {
     new Konami(function () {
         setIsExperimentalMode(!getIsExperimentalMode());
         location.reload();
+    });
+
+    var $vm = new Vue({
+        el: '#app',
+        //template: '<App/>',
+        render: function (h) {
+            return h('App')
+        },
+        components: { App }
     });
 
     inited = true;
