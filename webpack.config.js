@@ -43,7 +43,8 @@ module.exports = env => {
                 cacheName: "MI_Gear",
                 events: true,
                 entry: path.join(__dirname, './src/js/sw-img.js')
-            }
+            },
+            AppCache: false,
         }),
     ];
     //    plugins.push(new BundleAnalyzerPlugin());
