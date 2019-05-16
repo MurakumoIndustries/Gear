@@ -4,10 +4,8 @@
             <i class="icon icon-murakumo"></i>
         </a>
         <a class="navbar-brand" title="Murakumo Industries Gear List" href="#">
-            <span class="d-none d-xl-inline-block">Murakumo Industries</span>
-            <span class="d-none d-lg-inline-block d-xl-none">MI</span>
-            <span class="d-none d-sm-inline-block d-md-inline-block d-lg-none">Murakumo Industries</span>
-            <span class="d-sm-none">MI</span>
+            <span class="d-none d-md-inline-block">Murakumo Industries</span>
+            <span class="d-md-none">MI</span>
             <span>Gear</span>
             <span class="d-none d-sm-inline-block">List</span>
             <sup>α</sup>
