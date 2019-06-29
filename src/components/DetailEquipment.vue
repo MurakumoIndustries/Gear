@@ -20,10 +20,10 @@
                         <div class="text-right">{{data.cost}}</div>
                     </div>
                     <div class="col-8" v-if="data.category==2">
-                        <div class="float-left">spd type</div>
-                        <div class="text-right" v-if="data.spdMax==200">重装</div>
-                        <div class="text-right" v-if="data.spdMax==240">バランス</div>
-                        <div class="text-right" v-if="data.spdMax==280">高機動</div>
+                        <div class="float-left">{{Ui.getText('spdtype')}}</div>
+                        <div class="text-right" v-if="data.spdMax==200">{{Ui.getText('spdtypeheavy')}}</div>
+                        <div class="text-right" v-if="data.spdMax==240">{{Ui.getText('spdtypebalance')}}</div>
+                        <div class="text-right" v-if="data.spdMax==280">{{Ui.getText('spdtypelight')}}</div>
                     </div>
                 </div>
                 <div class="row">
