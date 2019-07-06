@@ -52,7 +52,6 @@ data["geartype"] = {
     "zh-CN": "装备类型",
 };
 
-data["weapon"] = { "ja-JP": "武装", "zh-TW": "武裝", "en-US": "Weapon", "zh-CN": "武器" }
 data["weaponL"] = {
     1: { "ja-JP": "ライフル", "zh-TW": "步槍", "en-US": "Rifle", "zh-CN": "步枪" },
     2: { "ja-JP": "バズーカ", "zh-TW": "火箭筒", "en-US": "Bazooka", "zh-CN": "火箭筒" },
