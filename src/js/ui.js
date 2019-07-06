@@ -49,14 +49,14 @@ data["geartype"] = {
     "ja-JP": "ギア種別",
     "zh-TW": "武裝種別",
     "en-US": "Gear Type",
-    "zh-CN": "装备类型",
+    "zh-CN": "武装类型",
 };
 
 data["weaponL"] = {
     1: { "ja-JP": "ライフル", "zh-TW": "步槍", "en-US": "Rifle", "zh-CN": "步枪" },
     2: { "ja-JP": "バズーカ", "zh-TW": "火箭筒", "en-US": "Bazooka", "zh-CN": "火箭筒" },
     3: { "ja-JP": "デュアル", "zh-TW": "雙槍", "en-US": "Twin", "zh-CN": "双枪" },
-    4: { "ja-JP": "スナイパー", "zh-TW": "狙擊槍", "en-US": "Sniper", "zh-CN": "狙击" },
+    4: { "ja-JP": "スナイパー", "zh-TW": "狙擊槍", "en-US": "Sniper", "zh-CN": "狙击枪" },
 };
 data["weaponS"] = {
     1: { "ja-JP": "両手剣", "zh-TW": "雙手劍", "en-US": "Sword", "zh-CN": "双手剑" },
