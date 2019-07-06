@@ -25,7 +25,7 @@ data["search"] = { "ja-JP": "検索", "zh-TW": "搜尋", "en-US": "Search", "zh-
 data["clear"] = { "ja-JP": "", "zh-TW": "清空", "en-US": "Clear", "zh-CN": "清空" };
 
 data["weapon"] = { "ja-JP": "ウェポン", "zh-TW": "武器", "en-US": "Weapon", "zh-CN": "武器" };
-data["equipment"] = { "ja-JP": "ドレス", "zh-TW": "裝備", "en-US": "Equipment", "zh-CN": "装备" };
+data["equipment"] = { "ja-JP": "ドレス", "zh-TW": "服裝", "en-US": "Equipment", "zh-CN": "装备" };
 
 data["currentversion"] = { "ja-JP": "バージョン：", "zh-TW": "當前版本：", "en-US": "Current Ver.:", "zh-CN": "当前版本：" };
 data["externallink"] = { "ja-JP": "外部リンク", "zh-TW": "外部鏈接", "en-US": "External Links", "zh-CN": "外部链接" };
