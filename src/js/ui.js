@@ -38,7 +38,7 @@ data["data"] = { "ja-JP": "", "zh-TW": "資料語言", "en-US": "Data", "zh-CN":
 data["server"] = { "ja-JP": "サーバー", "zh-TW": "伺服器", "en-US": "Server", "zh-CN": "服务器" };
 data["disablecache"] = { "ja-JP": "キャッシュを無効化", "zh-TW": "停用快取", "en-US": "Disable Cache", "zh-CN": "禁用缓存", };
 data["enablecache"] = { "ja-JP": "キャッシュを有効化", "zh-TW": "啟用快取", "en-US": "Enable Cache", "zh-CN": "启用缓存", };
-data["disablecachewarning"]={
+data["disablecachewarning"] = {
     "ja-JP": "キャッシュを無効化にすると、ページの読み込みが遅くなります。無効化にしますか？",
     "zh-TW": "停用快取會使網頁載入變慢，是否確認停用？",
     "en-US": "Disabling caching will cause the page to load slowly, CONFIRM?",
@@ -83,6 +83,8 @@ data["attribute"] = {
     9: { "ja-JP": "撃光", "zh-TW": "擊光", "en-US": "Light", "zh-CN": "" },
     10: { "ja-JP": "崩壊", "zh-TW": "崩壞", "en-US": "Collapse", "zh-CN": "" },
     11: { "ja-JP": "理論", "zh-TW": "理論", "en-US": "Theory", "zh-CN": "" },
+    //255:{ "ja-JP": "なし", "zh-TW": "", "en-US": "Nothing", "zh-CN": "" },
+    255: { "ja-JP": "", "zh-TW": "", "en-US": "", "zh-CN": "" },
 };
 
 data["spdtype"] = {
@@ -224,11 +226,17 @@ var renderAttrText = function (textList) {
         "light", "collapse", "theory", "nothing"
     ];
     _.each(textList, function (o, i) {
-        if (o > 0) {
+        if (o !== undefined && o !== 0) {
             text += '<span class="attr-text attr-' + attrList[i] + '">' + o + '</span>';
         }
     });
     return text;
+};
+var renderAttribute2nd = function (attribute2nd) {
+    var text = getText("attribute", attribute2nd);
+    var attrText = [];
+    attrText[attribute2nd - 4] = text;
+    return renderAttrText(attrText);
 };
 var renderDesc = function (text) {
     if (!text) {
@@ -245,6 +253,7 @@ const Ui = {
     setLang,
     init,
     renderAttrText,
+    renderAttribute2nd,
     renderDesc,
 };
 

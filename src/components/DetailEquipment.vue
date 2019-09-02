@@ -7,11 +7,11 @@
                 :src="company.icon ? '../img/com/' + company.icon + '.png' : ''"
                 :title="company.name"
                 :alt="company.name"
-            >
+            />
         </div>
         <div class="media mb-2">
             <div class="mr-3">
-                <IconGear :isLink="false" :data="data" :type="'equipment'"/>
+                <IconGear :isLink="false" :data="data" :type="'equipment'" />
             </div>
             <div class="media-body">
                 <div class="row mt-3">
@@ -21,9 +21,18 @@
                     </div>
                     <div class="col-8" v-if="data.category==2">
                         <div class="float-left">{{Ui.getText('spdtype')}}</div>
-                        <div class="text-right" v-if="data.spdMax==200">{{Ui.getText('spdtypeheavy')}}</div>
-                        <div class="text-right" v-if="data.spdMax==240">{{Ui.getText('spdtypebalance')}}</div>
-                        <div class="text-right" v-if="data.spdMax==280">{{Ui.getText('spdtypelight')}}</div>
+                        <div
+                            class="text-right"
+                            v-if="data.spdMax==200"
+                        >{{Ui.getText('spdtypeheavy')}}</div>
+                        <div
+                            class="text-right"
+                            v-if="data.spdMax==240"
+                        >{{Ui.getText('spdtypebalance')}}</div>
+                        <div
+                            class="text-right"
+                            v-if="data.spdMax==280"
+                        >{{Ui.getText('spdtypelight')}}</div>
                     </div>
                 </div>
                 <div class="row">
@@ -65,23 +74,33 @@
                             <img
                                 class="mr-3"
                                 :src="aSkill.icon&&('../img/skill/' + aSkill.icon + '.png')"
-                            >
+                            />
                             <div class="media-body">
                                 <div class="row">
                                     <div class="col">
                                         <fieldset>
-                                            <legend>{{aSkill.name}}</legend>
+                                            <legend>
+                                                <p class="m-0 float-left">{{aSkill.name}}</p>
+                                                <p class="m-0 float-right" style="font-size:1rem;">
+                                                    <span>{{Ui.getText('attribute',aSkill.attribute1st)}}</span>
+                                                    <span
+                                                        v-html="Ui.renderAttribute2nd(aSkill.attribute2nd)"
+                                                    ></span>
+                                                </p>
+                                            </legend>
                                             <div class="row">
                                                 <div class="col">
-                                                    <span>Freeze:</span>
-                                                    {{aSkill.freezeTime}}s
+                                                    <span>Freeze</span>
+                                                </div>
+                                                <div class="col">{{aSkill.freezeTime}}s</div>
+                                                <div class="col">
+                                                    <span>Count</span>
+                                                </div>
+                                                <div class="col">{{aSkill.activateLimit}}</div>
+                                                <div class="col">
+                                                    <span>ATK</span>
                                                 </div>
                                                 <div class="col">
-                                                    <span>Count:</span>
-                                                    {{aSkill.activateLimit}}
-                                                </div>
-                                                <div class="col">
-                                                    <span>ATK:</span>
                                                     {{data.longAtkMax}}
                                                     <span
                                                         v-html="Ui.renderAttrText(data.longAttrMax)"
@@ -90,17 +109,17 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col">
-                                                    <span>Invincible:</span>
-                                                    {{aSkill.invincibleTime}}s
+                                                    <span>Invincible</span>
                                                 </div>
+                                                <div class="col">{{aSkill.invincibleTime}}s</div>
                                                 <div class="col">
-                                                    <span>Duration:</span>
-                                                    {{aSkill.effectTime}}s
+                                                    <span>Duration</span>
                                                 </div>
+                                                <div class="col">{{aSkill.effectTime}}s</div>
                                                 <div class="col">
-                                                    <span>Cooldown:</span>
-                                                    {{aSkill.coolTime}}s
+                                                    <span>Cooldown</span>
                                                 </div>
+                                                <div class="col">{{aSkill.coolTime}}s</div>
                                             </div>
                                             <div v-html="Ui.renderDesc(aSkill.desc)"></div>
                                         </fieldset>
