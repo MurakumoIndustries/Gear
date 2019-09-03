@@ -4,6 +4,7 @@ import serverList from "../data/serverList.json";
 const baseKey = "MI_Gear_";
 const lastUpdateKey = baseKey + "LastUpdate";
 const serverKey = baseKey + "Server";
+const filelist = ['actress', 'weapon', 'equipment', 'skillactive', 'skillpassive', 'skilldetail', 'recipe', 'material', 'company'];
 
 var data = {};
 
@@ -41,14 +42,9 @@ var init = function (forceInit) {
                     data[key] = JSON.parse(json);
                 });
             };
-            promises.push(loaddata('actress'));
-            promises.push(loaddata('weapon'));
-            promises.push(loaddata('equipment'));
-            promises.push(loaddata('skillactive'));
-            promises.push(loaddata('skillpassive'));
-            promises.push(loaddata('recipe'));
-            promises.push(loaddata('material'));
-            promises.push(loaddata('company'));
+            _.each(filelist, function (o, i) {
+                promises.push(loaddata(o));
+            });
             return Promise.all(promises);
         }
         return localForage.clear().then(() => {
@@ -58,54 +54,14 @@ var init = function (forceInit) {
                     data[key] = jsondata;
                 });
             }
-            promises.push(
-                import (
-                    /* webpackChunkName: "jsondata" */
-                    '../data/' + folder + '/actress.json').then(jsondata => {
-                    return savedata('actress', folder, jsondata.default);
-                }));
-            promises.push(
-                import (
-                    /* webpackChunkName: "jsondata" */
-                    '../data/' + folder + '/weapon.json').then(jsondata => {
-                    return savedata('weapon', folder, jsondata.default);
-                }));
-            promises.push(
-                import (
-                    /* webpackChunkName: "jsondata" */
-                    '../data/' + folder + '/equipment.json').then(jsondata => {
-                    return savedata('equipment', folder, jsondata.default);
-                }));
-            promises.push(
-                import (
-                    /* webpackChunkName: "jsondata" */
-                    '../data/' + folder + '/skillactive.json').then(jsondata => {
-                    return savedata('skillactive', folder, jsondata.default);
-                }));
-            promises.push(
-                import (
-                    /* webpackChunkName: "jsondata" */
-                    '../data/' + folder + '/skillpassive.json').then(jsondata => {
-                    return savedata('skillpassive', folder, jsondata.default);
-                }));
-            promises.push(
-                import (
-                    /* webpackChunkName: "jsondata" */
-                    '../data/' + folder + '/recipe.json').then(jsondata => {
-                    return savedata('recipe', folder, jsondata.default);
-                }));
-            promises.push(
-                import (
-                    /* webpackChunkName: "jsondata" */
-                    '../data/' + folder + '/material.json').then(jsondata => {
-                    return savedata('material', folder, jsondata.default);
-                }));
-            promises.push(
-                import (
-                    /* webpackChunkName: "jsondata" */
-                    '../data/' + folder + '/company.json').then(jsondata => {
-                    return savedata('company', folder, jsondata.default);
-                }));
+            _.each(filelist, function (o, i) {
+                promises.push(
+                    import(
+                        /* webpackChunkName: "jsondata" */
+                        '../data/' + folder + '/' + o + '.json').then(jsondata => {
+                        return savedata(o, folder, jsondata.default);
+                    }));
+            });
             return Promise.all(promises).then(() => {
                 return store.setItem(lastUpdateKey, lastUpdate)
             });

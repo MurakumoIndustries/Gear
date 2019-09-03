@@ -7,11 +7,11 @@
                 :src="company.icon ? '../img/com/' + company.icon + '.png' : ''"
                 :title="company.name"
                 :alt="company.name"
-            >
+            />
         </div>
         <div class="media mb-2">
             <div class="mr-3">
-                <IconGear :isLink="false" :data="data" :type="'weapon'"/>
+                <IconGear :isLink="false" :data="data" :type="'weapon'" />
             </div>
             <div class="media-body">
                 <div class="row mt-3">
@@ -80,8 +80,8 @@
                             v-bind:key="pSkill.id+'-'+pSkill.openLevel"
                             class="row"
                         >
-                            <div class="col-auto">
-                                <span class="font-weight-light">
+                            <div class="col-auto" style="flex:0 0 5rem;">
+                                <span class="font-weight-light text-nowrap">
                                     Lv.
                                     {{pSkill.openLevel}}
                                 </span>
@@ -90,8 +90,8 @@
                                 <h5>{{pSkill.skill.name}}</h5>
                                 <div class="mb-1" v-html="Ui.renderDesc(pSkill.skill.desc)"></div>
                                 <div v-if="isExperimentalMode()">
-                                    <div v-for="text in pSkill.skill.detailList" v-bind:key="text">
-                                        <small class="text-black-50">{{text}}</small>
+                                    <div v-for="id in pSkill.skill.detailList" v-bind:key="id">
+                                        <small class="text-black-50">{{getSkillDetailDesc(id)}}</small>
                                     </div>
                                 </div>
                             </div>
@@ -217,6 +217,12 @@ export default {
         },
         company: function() {
             return Data.get("company", this.data.company) || {};
+        }
+    },
+    methods: {
+        getSkillDetailDesc: function(id) {
+            var detail = Data.get("skilldetail", id) || {};
+            return detail.name + "|" + detail.desc || "";
         }
     },
     components: {

@@ -81,12 +81,25 @@
                                         <fieldset>
                                             <legend>
                                                 <p class="m-0 float-left">{{aSkill.name}}</p>
-                                                <p class="m-0 float-right" style="font-size:1rem;">
-                                                    <span>{{Ui.getText('attribute',aSkill.attribute1st)}}</span>
-                                                    <span
-                                                        v-html="Ui.renderAttribute2nd(aSkill.attribute2nd)"
-                                                    ></span>
-                                                </p>
+                                                <div
+                                                    class="m-0 float-right text-right"
+                                                    style="font-size:1rem;"
+                                                >
+                                                    <div>
+                                                        <i
+                                                            class="material-icons"
+                                                        >{{aSkill.isNolockActivate==1?"gps_off":"gps_fixed"}}</i>
+                                                        <span>{{Ui.getText('attribute',aSkill.attribute1st)}}</span>
+                                                        <span
+                                                            v-html="Ui.renderAttribute2nd(aSkill.attribute2nd)"
+                                                        ></span>
+                                                    </div>
+                                                    <div v-if="isExperimentalMode()">
+                                                        <small
+                                                            class="text-black-50"
+                                                        >{{aSkill.detailCategoryName}}</small>
+                                                    </div>
+                                                </div>
                                             </legend>
                                             <div class="row">
                                                 <div class="col">
@@ -122,6 +135,29 @@
                                                 <div class="col">{{aSkill.coolTime}}s</div>
                                             </div>
                                             <div v-html="Ui.renderDesc(aSkill.desc)"></div>
+                                            <div v-if="isExperimentalMode()">
+                                                <div
+                                                    class="mb-1"
+                                                    v-for="pSkill in aSkill.passiveSkills"
+                                                    v-bind:key="pSkill.id"
+                                                >
+                                                    <h5>{{pSkill.skill.name}}</h5>
+                                                    <div
+                                                        class="mb-1"
+                                                        v-html="Ui.renderDesc(pSkill.skill.desc)"
+                                                    ></div>
+                                                    <div v-if="isExperimentalMode()">
+                                                        <div
+                                                            v-for="id in pSkill.skill.detailList"
+                                                            v-bind:key="id"
+                                                        >
+                                                            <small
+                                                                class="text-black-50"
+                                                            >{{getSkillDetailDesc(id)}}</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </fieldset>
                                     </div>
                                 </div>
@@ -143,8 +179,8 @@
                             v-bind:key="pSkill.id+'-'+pSkill.openLevel"
                             class="row"
                         >
-                            <div class="col-auto">
-                                <span class="font-weight-light">
+                            <div class="col-auto" style="flex:0 0 5rem;">
+                                <span class="font-weight-light text-nowrap">
                                     Lv.
                                     {{pSkill.openLevel}}
                                 </span>
@@ -153,8 +189,8 @@
                                 <h5>{{pSkill.skill.name}}</h5>
                                 <div class="mb-1" v-html="Ui.renderDesc(pSkill.skill.desc)"></div>
                                 <div v-if="isExperimentalMode()">
-                                    <div v-for="text in pSkill.skill.detailList" v-bind:key="text">
-                                        <small class="text-black-50">{{text}}</small>
+                                    <div v-for="id in pSkill.skill.detailList" v-bind:key="id">
+                                        <small class="text-black-50">{{getSkillDetailDesc(id)}}</small>
                                     </div>
                                 </div>
                             </div>
@@ -216,7 +252,17 @@ export default {
     },
     computed: {
         aSkill: function() {
-            return Data.get("skillactive", this.data.activeSkill) || {};
+            var sk = _.extend(
+                { passiveSkills: [] },
+                Data.get("skillactive", this.data.activeSkill)
+            );
+            _.each(sk.passiveList, function(o, i) {
+                sk.passiveSkills[i] = {
+                    id: o,
+                    skill: Data.get("skillpassive", o)
+                };
+            });
+            return sk;
         },
         passiveSkills: function() {
             var list = [];
@@ -283,6 +329,12 @@ export default {
         },
         company: function() {
             return Data.get("company", this.data.company) || {};
+        }
+    },
+    methods: {
+        getSkillDetailDesc: function(id) {
+            var detail = Data.get("skilldetail", id) || {};
+            return detail.name + "|" + detail.desc || "";
         }
     },
     components: {
