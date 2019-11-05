@@ -157,10 +157,10 @@ import { Event } from "../js/event.js";
 export default {
     data: function() {
         return {
+            gearType: "",
             langText: Ui.getLangText(),
             isUpdating: false,
-            isUpdateReady: false,
-            gearType: ""
+            isUpdateReady: false
         };
     },
     created: function() {
