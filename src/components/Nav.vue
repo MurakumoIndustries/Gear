@@ -56,11 +56,22 @@
                             style="vertical-align: top; height: 0; margin-top: -0.325rem; padding-right: 0.25rem;"
                         >
                             <div id="server">{{currentServer.name}}</div>
-                            <div
-                                class="m-0"
-                                style="font-size: 0.75rem;line-height:0.75rem;"
-                                id="version"
-                            >{{currentServer.version}}</div>
+                            <div class="m-0" id="version">
+                                <i
+                                    v-show="isUpdating"
+                                    class="material-icons version-text spin"
+                                >autorenew</i>
+                                <span v-show="isUpdating" class="version-text">Updating...</span>
+                                <span
+                                    v-show="isUpdateReady"
+                                    class="version-text"
+                                    style="font-weight: bold;color: #ff5588;"
+                                >NEW!</span>
+                                <span
+                                    v-show="!(isUpdating||isUpdateReady)"
+                                    class="version-text"
+                                >{{currentServer.version}}</span>
+                            </div>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
@@ -140,15 +151,15 @@
 
 <script>
 import { Data } from "../js/data.js";
-import { Event } from "../js/event.js";
 import { Ui } from "../js/ui.js";
-import $ from "jquery";
+import { Event } from "../js/event.js";
 
 export default {
     data: function() {
-        var langText = Ui.getLangText();
         return {
-            langText: langText,
+            langText: Ui.getLangText(),
+            isUpdating: false,
+            isUpdateReady: false,
             gearType: ""
         };
     },
@@ -159,6 +170,16 @@ export default {
                 return;
             }
             $vm.gearType = type;
+        });
+        Event.$on("new-version-updating", function() {
+            console.log("new-version-updating");
+            $vm.isUpdating = true;
+            $vm.isUpdateReady = false;
+        });
+        Event.$on("new-version-update-ready", function() {
+            console.log("new-version-update-ready");
+            $vm.isUpdating = false;
+            $vm.isUpdateReady = true;
         });
     },
     methods: {
@@ -219,6 +240,24 @@ export default {
     width: 2.5rem;
     height: 2.5rem;
     background-image: url(../img/murakumo.png);
+}
+
+.version-text {
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+    vertical-align: top;
+}
+
+.spin {
+    animation: spin 2s infinite linear;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 </style>
 
